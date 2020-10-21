@@ -1,0 +1,79 @@
+.verifitylogin {
+  display: flex;
+  flex-direction: column;
+  min-width: 700px;
+  border-radius: 3px 3px 0 0;
+  background-color: #fff;
+
+  &__title {
+    margin: 5px;
+    font-weight: 300;
+    color: #fefefe;
+    align-self: flex-end;
+    font-family: Roboto;
+  }
+
+  &__head {
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    height: 94px;
+    background-color: #03a9f4;
+    height: auto;
+  }
+
+  &__img {
+    height: 80px;
+    margin: 5px;
+  }
+
+  &__body {
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 30px;
+  }
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__form-group {
+    border-bottom: solid 2px #dadee1;
+    height: 38px;
+    display: flex;
+    width: 100%;
+    width: 310px;
+    align-items: flex-end;
+    border-bottom: solid 1px #dadee1;
+  }
+
+  &__form-icon {
+    height: 20px;
+    width: 18px;
+    margin-bottom: 3px;
+  }
+
+  &__form-input {
+    margin-left: 7px;
+  }
+
+  &__form-btn {
+    width: 92px;
+    height: 19px;
+    color: #ffffff;
+    font-family: Roboto;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: -0.2px;
+    line-height: normal;
+    width: 145px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #03a9f4;
+    margin-top: 25px;
+  }
+}

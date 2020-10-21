@@ -1,0 +1,28 @@
+.post {
+  padding: 25px 0px 35px;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  border-bottom: solid 0.5px #dee3e6;
+  background-color: #fff;
+  padding: 25px 50px 35px 50px;
+
+  &__description {
+  }
+
+  &__crumbs {
+    margin: 30px 30px 9px 30px;
+
+    font-size: 12px;
+    display: flex;
+  }
+
+  &__crumb {
+    margin-left: 10px;
+  }
+
+  &__rect {
+    border-top: 0.3px solid gray;
+    padding: 10px 10px 10px 30px;
+  }
+}

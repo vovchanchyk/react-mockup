@@ -1,0 +1,435 @@
+@import "./components/accountsettings/Ditails/Ditails.scss";
+@import "./components/time/SetpostTwo/SetpostTwo.scss";
+@import "./components/discover/Setpost/Setpost.scss";
+@import "./components/addcontent/LaunchingPost/LaunchingPost.scss";
+@import "./components/mycontent/VerifitySignupTwo/VerifitySignupTwo.scss";
+@import "./components/mycontent/VerifitySignup/VerifitySignup.scss";
+@import "./components/mycontent/VerifityLogin/VerifityLogin.scss";
+@import "./components/mycontent/VerifityPostRequired/VerifityPostRequired.scss";
+@import "./components/mycontent/Post/Post.scss";
+@import "./components/footer/Footer.scss";
+
+
+
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+:focus,
+:active {
+  outline: none;
+}
+a:focus,
+a:active {
+  outline: none;
+}
+
+nav,
+footer,
+header,
+aside {
+  display: block;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  font-size: 100%;
+  line-height: 1;
+  font-size: 18px;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+input,
+button,
+textarea {
+  font-family: inherit;
+}
+
+input::-ms-clear {
+  display: none;
+}
+button {
+  cursor: pointer;
+}
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+a,
+a:visited {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+ul li {
+  list-style: none;
+}
+li {
+  list-style: none;
+}
+img {
+  vertical-align: top;
+}
+
+.App {
+  display: flex;
+  height: auto;
+}
+
+
+.sidebar {
+  min-width: 280px;
+
+  background-color: #fefefe;
+  box-shadow: 2px 0 45px 20px rgba(114, 124, 129, 0.19);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__brand {
+    display: flex;
+    margin-top: 20px;
+  }
+
+  &__burger {
+    position: fixed;
+    border: none;
+    outline: none;
+    width: 32px;
+    height: 18px;
+    background: transparent;
+    left: 30px;
+    top:30px
+  }
+  &__burger-img {
+    display: block;
+    width: 80%;
+    margin: 10px auto;
+    height: 3px;
+    background-color: black;
+
+    &::before,
+    &::after {
+      content: " ";
+      display: block;
+      width: 100%;
+      height: 3px;
+      background-color: black;
+      transform: translateY(4px);
+    }
+    &::before {
+      transform: translateY(-6px);
+    }
+  }
+
+  &__btn {
+    border: none;
+    outline: none;
+    width: 158px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #03a9f4;
+    color: #ffffff;
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 180px;
+  }
+
+  &__navigation {
+    margin-top: 79px;
+    list-style: none;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+
+    font-size: 12px;
+  }
+  &__navigation-item {
+    height: auto;
+    margin-bottom: 25px;
+  }
+  &__navigation-item--disabled {
+    height: auto;
+    margin-bottom: 25px;
+   
+    pointer-events: none;
+    a{
+      color: #a7a9aa;
+    }
+  }
+
+  &__icon {
+    margin-right: 29px;
+  }
+}
+.off{
+  display: none;
+}
+.main {
+  flex-grow: 1;
+}
+.header {
+  display: flex;
+  width: 100%;
+
+  justify-content: flex-end;
+  align-items: center;
+
+  height: 75px;
+  box-shadow: 0 0 4px 1px rgba(114, 124, 129, 0.19);
+  background-color: #fefefe;
+
+  &__verifity {
+    width: fit-content;
+    font-size: 15px;
+    margin-right: 62px;
+  }
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  &__left {
+    width: fit-content;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    height: 190px;
+    border: 1px solid #cdd6da;
+    background-color: #fefefe;
+    padding-top: 71px;
+    padding-left: 131px;
+    position: relative;
+  }
+
+  &__title {
+    font-size: 41px;
+    font-weight: 400;
+    color: #000000;
+  }
+
+  &__subtitle {
+    color: #78909c;
+    padding-left: 2px;
+
+    font-size: 21px;
+
+    letter-spacing: -0.21px;
+    line-height: normal;
+  }
+
+  &__routers {
+    display: flex;
+    margin-top: 20px;
+    width: 80%;
+    justify-content: flex-start;
+  }
+
+  &__route {
+    margin-right: 5px;
+    padding-bottom: 10px;
+    &:hover {
+      border-bottom: 4px solid #cdd6da;
+    }
+    &:last-child{
+      margin-left: 5px;
+    }
+  }
+
+  &__link {
+    font-size: 18px;
+    font-weight: 400;
+    color: #78909c;
+    cursor: pointer;
+  }
+
+  &__btn {
+    position: absolute;
+    right: 81px;
+    width: 158px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #03a9f4;
+    color: #ffffff;
+  }
+
+  &__body {
+    min-height: 300px;
+    height: auto;
+    background-color: #f2f5f8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+  }
+}
+
+
+
+
+
+.checked {
+  background-color: #03a9f4;
+  border: 5px solid white;
+  box-shadow: 0 0 12px 1px #a7a9aa;
+}
+
+.ac-info {
+  &::before {
+    content: "Acount info";
+    width: 65px;
+    left: -25px;
+  }
+}
+
+.add-content {
+  &::before {
+    content: "Add content";
+    width: 85px;
+    left: -25px;
+    color: #03a9f4;
+  }
+}
+
+.shedule-post {
+  &::before {
+    content: "Add content";
+    width: 65px;
+    left: -25px;
+    color: #03a9f4;
+  }
+}
+.user{
+  display: flex;
+  align-items: center;
+}
+.username{
+  color: #78909c;
+  margin-left: 5px;
+}
+
+.step-two {
+  width: 50%;
+}
+.checked {
+  background-color: #03a9f4;
+  border: 5px solid white;
+  box-shadow: 0 0 12px 1px #a7a9aa;
+}
+
+.message {
+  &::before {
+    content: "Message";
+    width: 65px;
+    // left: -25px;
+    color: #dee3e6;
+  }
+}
+
+
+
+
+.bold {
+  font-weight: 700;
+}
+.blue {
+  color: #03a9f4;
+}
+
+
+.all-steps {
+  width: 100%;
+}
+.checked {
+  background-color: #03a9f4;
+  border: 5px solid white;
+  box-shadow: 0 0 12px 1px #a7a9aa;
+}
+.add-content {
+  &::before {
+    content: "Add content";
+    width: 75px;
+    left: -25px;
+    color: #03a9f4;
+  }
+}
+.shedule-post {
+  &::before {
+    content: "Shedule-post";
+    width: 75px;
+    left: -25px;
+
+    color: #03a9f4;
+  }
+}
+.without-border {
+}
+
+
+.without-border {
+  border: none;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+
+.several-subreddit {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.blue {
+}
+.without-border {
+  border: none;
+}
+
+
+.light {
+  font-weight: 300;
+}
+.bold {
+  font-weight: 800;
+  font-size: 14px;
+}
+.red {
+  color: #ff6f6f;
+}
+button{
+  &:disabled{
+    pointer-events: none;
+    background-color: #a7a9aa;
+  
+  }
+} 
+.sidebar__route{
+  &:disabled{
+    pointer-events: none;
+    background-color: #a7a9aa;
+    color: red;
+    cursor: not-allowed;
+  
+  }
+ 
+
+} 

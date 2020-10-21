@@ -1,0 +1,83 @@
+.setpost {
+  background-color: #fff;
+  height: auto;
+
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  &__head {
+    display: flex;
+    padding-left: 30px;
+    align-items: center;
+    height: 52px;
+    border-left: 5px solid #03a9f4;
+    border-bottom: solid 0.5px #dee3e6;
+  }
+
+  &__title {
+    color: #626262;
+    font-family: Roboto;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 18px;
+  }
+
+  &__body {
+    padding: 0px 50px 70px;
+  }
+
+  &__item {
+    padding: 25px 0px 35px;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    border-bottom: solid 0.5px #dee3e6;
+  }
+
+  &__subreddit {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 50%;
+  }
+
+  &__subreddit-title {
+    padding: 10px 0;
+  }
+
+  &__input {
+    width: 260px;
+    height: 19px;
+
+    border: 0.3px solid #a7a9aa;
+  }
+
+  &__btn {
+    width: 88px;
+    padding: 5px;
+    border-radius: 12px;
+    background-color: #03a9f4;
+    color: #fff;
+    font-size: 10px;
+    margin-top: 20px;
+    width: fit-content;
+  }
+
+  &__item-description {
+    padding: 25px 0 0; //fonts
+    width: 272px;
+    height: 10px;
+    color: #585858;
+    font-family: Roboto;
+    font-size: 11px;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+    text-align: left;
+    font-style: normal;
+    letter-spacing: -0.11px;
+    line-height: normal;
+    margin-right: 5px;
+  }
+}
