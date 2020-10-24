@@ -7,6 +7,7 @@ import UnlockedIMG from './../../../img/login/unlocked.png';
 
 export default class VerifitySignupTwo extends React.Component {
 constructor(props){
+  debugger
   super(props)
   this.state = {
     userName :'',
@@ -27,8 +28,10 @@ changePassword=(event)=>{
   this.setState({password: text })
  } 
 submit=(event)=>{
+  debugger
  event.preventDefault()
- this.props.store.addUser(this.state)
+this.props.store.addUser(this.state)
+this.props.rerender()
  this.props.toLogin()
  let clean = {
   userName :'',

@@ -3,11 +3,21 @@ import React from 'react';
 import LaunchingPost from './LaunchingPost/LaunchingPost';
 
 export default class AddContent extends React.Component {
+   constructor(props){
+     super(props)
+   }
+  cons=()=>{
+    console.log(this.props)
+  }
 
+ 
     render() {
+     
+
       return (
   
         <section className="section">
+          <button onClick={this.cons}>console</button>
        <AddContentHead/>
        <AddContentBody/>
        

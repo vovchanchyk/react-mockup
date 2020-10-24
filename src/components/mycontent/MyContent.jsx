@@ -6,7 +6,7 @@ import VerifityPostRequired from './VerifityPostRequired/VerifityPostRequired';
 import VerifityLogin from './VerifityLogin/VerifityLogin';
 import VerifitySignup from './VerifitySignup/VerifitySignup';
 import VerifitySignupTwo from './VerifitySignupTwo/VerifitySignupTwo';
-
+import {StoreContext} from './../../App'
 
 
 export default class MyContent extends React.Component {
@@ -23,7 +23,7 @@ export default class MyContent extends React.Component {
 
         break;
       case false:
-        return <Verifity store={this.props.store} rerender={this.props.rerender}/>
+        return <Verifity />
 
         break;
 
@@ -43,7 +43,7 @@ class Verifity extends React.Component {
   }
 
   toLogin =()=>{
-  
+
     this.setState({wayofveritity : 'login'})
   }
   toSignup =()=>{
@@ -62,13 +62,13 @@ class Verifity extends React.Component {
       case 'required': return <MyContentRequired  toLogin={this.toLogin}/>
 
         break;
-      case 'login': return (<MyContentLogin store={this.props.store} toSignup={this.toSignup} rerender={this.props.rerender}/>)
+      case 'login': return (<MyContentLogin  toSignup={this.toSignup} />)
 
         break;
       case 'signup':  return (<MyContentSignup toLogin={this.toLogin} toSignupForm={this.toSignupForm}/>)
         break;
 
-      case 'signuptwo': return (<MyContentSignupTwo store={this.props.store} toSignup={this.toSignup}  toLogin={this.toLogin}/>)
+      case 'signuptwo': return (<MyContentSignupTwo  toSignup={this.toSignup}  toLogin={this.toLogin}/>)
         break;
         default:  
           break  
@@ -112,7 +112,7 @@ class MyContentLogin extends React.Component {
 
       <section className="section">
         <MyContentHeadLogin toSignup={this.props.toSignup}/>
-        <MyContentBodyLogin store={this.props.store} rerender={this.props.rerender}/>
+        <MyContentBodyLogin />
       </section>
     )
   }
@@ -138,8 +138,8 @@ class MyContentSignupTwo extends React.Component {
     return (
 
       <section className="section">
-        <MyContentHeadSignupTwo />
-        <MyContentBodySignupTwo store={this.props.store} toSignup={this.props.toSignup}  toLogin={this.props.toLogin}/>
+        <MyContentHeadSignupTwo toLogin={this.props.toLogin}/>
+        <MyContentBodySignupTwo  toSignup={this.props.toSignup} toLogin={this.props.toLogin} />
       </section>
     )
   }
@@ -195,11 +195,17 @@ toSignup=()=>{
 
   }
 }
+
 class MyContentBodyLogin extends React.Component {
   render() {
     return (
       <div className="section__body">
-        <VerifityLogin store={this.props.store} rerender={this.props.rerender}/>
+        <StoreContext.Consumer>
+          {(value)=>{
+            return     <VerifityLogin  store={value.store} rerender={value.rerender}/>
+          }}
+    
+        </StoreContext.Consumer>
       </div>
     )
   }
@@ -247,10 +253,10 @@ class MyContentHeadSignupTwo extends React.Component {
           <h4 className="section__subtitle">Sort by</h4>
           <nav className="section__routers">
             <li className="section__route">
-              <a className="section__link" href="">Login</a>
+              <a className="section__link" href="#" onClick={this.props.toLogin}>Login</a>
             </li>
             <li className="section__route">
-              <a className="section__link" href="">Signup</a>
+              <a className="section__link" href="#">Signup</a>
             </li>
           </nav>
         </div>
@@ -263,7 +269,11 @@ class MyContentBodySignupTwo extends React.Component {
     return (
 
       <div className="section__body">
-        <VerifitySignupTwo store={this.props.store} toSignup={this.props.toSignup}  toLogin={this.props.toLogin}/>
+        <StoreContext.Consumer>
+          {(value)=>{
+            return     <VerifitySignupTwo   store={value.store} rerender={value.rerender}  toLogin={this.props.toLogin}toSignup={this.props.toSignup} />
+          }}
+        </StoreContext.Consumer>
       </div>
     )
   }
