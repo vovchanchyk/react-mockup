@@ -4,33 +4,45 @@ import LoginIMG from './../../../img/popup/login@2x.png';
 import AvatarIMG from './../../../img/login/avatar.png';
 import EmailIMG from './../../../img/login/envelope.png';
 import UnlockedIMG from './../../../img/login/unlocked.png';
+import { ADDUSER } from '../../../store/registrationReduser';
 
 export default class VerifitySignupTwo extends React.Component {
 constructor(props){
-  debugger
+ 
   super(props)
   this.state = {
-    userName :'',
-    userEmail:'',
-    password :'',
+    formData:{
+      name :'',
+      email:'',
+      password :'',
+    },
+    type:ADDUSER
+   
   }
 }
 changeName=(event)=>{
- let text = event.target.value
- this.setState({userName: text })
+  let text = event.target.value
+  let otherState = {...this.state.formData }
+  otherState.name = text
+  this.setState( {formData : otherState})
 } 
 changeEmail=(event)=>{
- let text = event.target.value
- this.setState({userEmail: text })
+  let text = event.target.value
+  let otherState = {...this.state.formData }
+  otherState.email = text
+  this.setState( {formData : otherState})
 } 
 changePassword=(event)=>{
   let text = event.target.value
-  this.setState({password: text })
+  let otherState = {...this.state.formData }
+  otherState.password = text
+  this.setState( {formData : otherState})
  } 
 submit=(event)=>{
-  debugger
+
  event.preventDefault()
-this.props.store.addUser(this.state)
+this.props.store.dispatch(this.state)
+console.log(this.props.store.getState())
 this.props.rerender()
  this.props.toLogin()
  let clean = {
@@ -38,7 +50,7 @@ this.props.rerender()
   userEmail:'',
   password :'',
 }
-this.setState(clean) 
+this.setState({formData:clean}) 
 }
   render() {
     return (
@@ -67,7 +79,7 @@ this.setState(clean)
                 className="verifitysignuptwo__form-input"
                 type="text"
                 placeholder="Username"
-                value={this.state.userName}
+                value={this.state.formData.name}
                 onChange={this.changeName}
               />
             </div>
@@ -81,7 +93,7 @@ this.setState(clean)
                 className="verifitysignuptwo__form-input"
                 type="email"
                 placeholder="Email"
-                value={this.state.userEmail}
+                value={this.state.formData.email}
                 onChange={this.changeEmail}
               />
             </div>
@@ -95,7 +107,7 @@ this.setState(clean)
                 className="verifitysignuptwo__form-input"
                 type="password"
                 placeholder="Password"
-                value={this.state.password}
+                value={this.state.formData.password}
                 onChange={this.changePassword}
               />
             </div>

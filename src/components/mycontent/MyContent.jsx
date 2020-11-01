@@ -271,8 +271,13 @@ class MyContentBodySignupTwo extends React.Component {
       <div className="section__body">
         <StoreContext.Consumer>
           {(value)=>{
-            return     <VerifitySignupTwo   store={value.store} rerender={value.rerender}  toLogin={this.props.toLogin}toSignup={this.props.toSignup} />
-          }}
+            return   (  
+            <VerifitySignupTwo   
+              store={value.store} 
+              rerender={value.rerender}  
+              toLogin={this.props.toLogin}
+              toSignup={this.props.toSignup} />
+             ) }}
         </StoreContext.Consumer>
       </div>
     )

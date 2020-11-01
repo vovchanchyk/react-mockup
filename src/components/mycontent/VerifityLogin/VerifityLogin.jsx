@@ -4,38 +4,51 @@ import React from 'react';
 import LoginIMG from './../../../img/popup/login@2x.png';
 import AvatarIMG from './../../../img/login/avatar.png'
 import UnlockedIMG from './../../../img/login/unlocked.png'
+import { GETACCES } from '../../../store/registrationReduser';
 
 export default class VerifityLogin extends React.Component {
- constructor(props){
-   debugger
+ constructor(props){ 
    super(props)
    this.state = {
-     username :'',
-     password :'',
-   }
+     formData:{
+      name :'',
+      password :''
+     },
+    type:GETACCES    
  }
+}
  changeName=(event)=>{
-  let text = event.target.value
-  this.setState({username: text })
+let text = event.target.value
+let otherState = {...this.state.formData }
+otherState.name = text
+this.setState( {formData : otherState})
+
 } 
 changePassword=(event)=>{
+
   let text = event.target.value
-  this.setState({password: text })
+  let otherState = {...this.state.formData }
+  otherState.password = text
+  this.setState( {formData : otherState})
+
 } 
 
  submit=(event)=>{
- debugger
   event.preventDefault()
- 
-  this.props.store.checkUser(this.state)
+  this.props.store.dispatch(this.state)
+  console.log(this.props.store.getState())
   this.props.rerender()
-  let clean =  {
-    username :'',
-    password :'',
+  let clean =  { 
+    name :'',
+    password :''
   }
-  this.setState(clean)
+  this.setState({formData : clean})
  }
+
+
+ 
   render() {
+
     return (
       <div className="verifitylogin">
         <div className="verifitylogin__head">
@@ -59,7 +72,7 @@ changePassword=(event)=>{
                 type="text"
                 placeholder="Username or Email"
                 onChange={this.changeName}
-                value={this.state.username}
+                value={this.state.formData.name}
               />
             </div>
             <div className="verifitylogin__form-group">
@@ -72,7 +85,7 @@ changePassword=(event)=>{
                 className="verifitylogin__form-input"
                 type="text"
                 placeholder="Password"
-                value={this.state.password}
+                value={this.state.formData.password}
                 onChange={this.changePassword}
               />
             </div>

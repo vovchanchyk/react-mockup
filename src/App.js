@@ -1,6 +1,8 @@
 import React from 'react';
 import { Route, Link, BrowserRouter, Redirect, Router } from 'react-router-dom';
 import './App.scss';
+import {store} from './store/storeFromRedux';
+import { ADDUSER, GETACCES } from './store/registrationReduser';
 
 
 import AccountSettings from './components/accountsettings/accountsettings';
@@ -29,7 +31,16 @@ import PostIMG from './img/sidebar/post.png';
 import PostSIMG from './img/sidebar/post-it.png';
 
 
-import store from './store/store';
+// import store from './store/store';
+
+
+
+
+
+
+
+
+
 
 export const StoreContext = React.createContext()
 
@@ -55,13 +66,14 @@ class App extends React.Component {
     }
   }
   render() {
+
     return (
       <BrowserRouter>
         <div className="App">
 
           <Sidebar visible={this.state.visible} disabled={this.state.disabled} />
 
-          <StoreContext.Provider value={{ store: store, rerender: this.rerenderAllThree }}>
+          <StoreContext.Provider value={{ state:store.getState(), store: store, rerender: this.rerenderAllThree }}>
             <Main />
           </StoreContext.Provider>
 
@@ -129,11 +141,11 @@ class Sidebar extends React.Component {
 class Header extends React.Component {
 
   render() {
-  
+ 
     return (
       <header className="header">
         <div className="header__verifity">
-          <LoginLink store={this.props.store} />
+          <LoginLink state={this.props.state} />
         </div>
       </header>
     )
@@ -148,13 +160,14 @@ class LoginLink extends React.Component {
 
   }
   render() {
-debugger
-    switch (this.props.store.verifity) {
+
+
+    switch (this.props.state.verifity) {
       case false:
         return <Link to="/mycontent" className="heder__route">login|Singup</Link>
         break;
       case true:
-        return <div className="user"> <img src={avatarIMG} alt="avatar" className="useravatar" /> <h4 className="username">{this.props.store.yourAссess.name}</h4></div>
+        return <div className="user"> <img src={avatarIMG} alt="avatar" className="useravatar" /> <h4 className="username">{this.props.state.yourAcces.name}</h4></div>
         break;
 
 
@@ -164,9 +177,6 @@ debugger
 
   }
 }
-
-
-
 class Main extends React.Component {
 
   render() {
@@ -178,12 +188,12 @@ class Main extends React.Component {
           
           return (
             <div className="main">
-              <Header store={value.store}/>
-              <Route exact path="/" component={MyContent} store={value.store}/>
-              <PrivateRoute path="/time" component={Time} store={value.store}/>
-              <PrivateRoute path="/discover" component={Discover} store={value.store}/>
-              <PrivateRoute path="/addcontent" component={AddContent} store={value.store}/>
-              <PrivateRoute path="/accountsettings" component={AccountSettings} store={value.store}/>
+              <Header state={value.state}/>
+              <Route exact path="/" component={MyContent} store={value.store} state={value.state}/>
+              <PrivateRoute path="/time" component={Time} store={value.state}/>
+              <PrivateRoute path="/discover" component={Discover} store={value.state}/>
+              <PrivateRoute path="/addcontent" component={AddContent} store={value.state}/>
+              <PrivateRoute path="/accountsettings" component={AccountSettings} store={value.state}/>
               <Footer />
             </div>
           )
