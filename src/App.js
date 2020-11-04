@@ -4,6 +4,8 @@ import './App.scss';
 import {store} from './store/storeFromRedux';
 import { ADDUSER, GETACCES } from './store/registrationReduser';
 
+import {connect, Provider} from 'react-redux'
+
 
 import AccountSettings from './components/accountsettings/accountsettings';
 
@@ -53,9 +55,7 @@ class App extends React.Component {
       disabled: true
     }
   }
-  rerenderAllThree = () => {
-    store.verifity ? this.setState({ disabled: false }) : this.setState({ disabled: true })
-  }
+ 
   toggleBurger = () => {
     if (this.state.visible === true) {
 
@@ -66,16 +66,20 @@ class App extends React.Component {
     }
   }
   render() {
-
+   
     return (
       <BrowserRouter>
         <div className="App">
 
-          <Sidebar visible={this.state.visible} disabled={this.state.disabled} />
+          <Sidebar visible={this.state.visible} />
+        <Provider store={store}>
 
-          <StoreContext.Provider value={{ state:store.getState(), store: store, rerender: this.rerenderAllThree }}>
-            <Main />
-          </StoreContext.Provider>
+    
+        <ContainerOfMain/>
+        </Provider>
+         
+          
+         
 
           <button className="sidebar__burger" onClick={this.toggleBurger}>
             <span className="sidebar__burger-img" ></span>
@@ -141,7 +145,7 @@ class Sidebar extends React.Component {
 class Header extends React.Component {
 
   render() {
- 
+
     return (
       <header className="header">
         <div className="header__verifity">
@@ -177,39 +181,52 @@ class LoginLink extends React.Component {
 
   }
 }
+
+
+
+
+
 class Main extends React.Component {
 
   render() {
 
-    return (
-
-      <StoreContext.Consumer>
-        {(value) => {
+  
           
           return (
             <div className="main">
-              <Header state={value.state}/>
-              <Route exact path="/" component={MyContent} store={value.store} state={value.state}/>
-              <PrivateRoute path="/time" component={Time} store={value.state}/>
-              <PrivateRoute path="/discover" component={Discover} store={value.state}/>
-              <PrivateRoute path="/addcontent" component={AddContent} store={value.state}/>
-              <PrivateRoute path="/accountsettings" component={AccountSettings} store={value.state}/>
+              <Header state={this.props}/>
+              <Route exact path="/" component={MyContent} store={this.props} state={this.props}/>
+              <PrivateRoute path="/time" component={Time} store={this.props}/>
+              <PrivateRoute path="/discover" component={Discover} store={this.props}/>
+              <PrivateRoute path="/addcontent" component={AddContent} store={this.props}/>
+              <PrivateRoute path="/accountsettings" component={AccountSettings} store={this.props}/>
               <Footer />
             </div>
           )
-        }
-
-        }
-      </StoreContext.Consumer>
-
-
-
-
-
-    )
 
   }
 }
+
+let mapStateToProps =(state)=>{
+
+  return state
+}
+let mapDispatchToProps =(dispatch)=>{
+
+  return {
+    addUser : (formData)=>{
+      dispatch({type:ADDUSER, data: formData })
+    },
+    checkUserz :(formData)=>{
+      dispatch({type:GETACCES, data: formData })
+  
+    }
+  } 
+    
+  
+}
+const ContainerOfMain =connect(mapStateToProps,mapDispatchToProps)(Main)
+
 
 
 

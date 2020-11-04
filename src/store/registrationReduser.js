@@ -10,18 +10,32 @@ const initialState = {
 }
 
 export  function registrationReduser( state = initialState,action){
- 
+
     switch (action.type) {
-        case ADDUSER : return  {...state,users : [ ...state.users,action.formData ]};
+        case ADDUSER : {
+            debugger
+          let  copyStateFor = {...state} ;
+          copyStateFor.users = [...state.users]
+          copyStateFor.users.push(action.data)
+          
+        return copyStateFor
+        }
                    
             break;
-        case GETACCES :  return {...state,yourAcces : state.users.find(user =>  user.password === action.formData.password
-             && ( user.name === action.formData.name || user.email === action.formData.email )),verifity:true}          
+        case GETACCES : {
+         debugger
+          let copyStateFor = {...state}
+           copyStateFor.yourAcces = {...state.yourAcces}
+           copyStateFor.yourAcces =  state.users.find(user =>  user.password === action.data.password
+                && ( user.name === action.data.name || user.email === action.data.email ))
+                copyStateFor.verifity = true 
+             return copyStateFor
+           }
                 break;
     
         default: return state
             break;
     }
     
-    return state
+    
 }

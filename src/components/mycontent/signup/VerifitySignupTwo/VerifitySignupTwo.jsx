@@ -1,58 +1,55 @@
 import React from 'react';
 
-import LoginIMG from './../../../img/popup/login@2x.png';
-import AvatarIMG from './../../../img/login/avatar.png';
-import EmailIMG from './../../../img/login/envelope.png';
-import UnlockedIMG from './../../../img/login/unlocked.png';
-import { ADDUSER } from '../../../store/registrationReduser';
+import LoginIMG from './../../../../img/popup/login@2x.png';
+import AvatarIMG from './../../../../img/login/avatar.png';
+import EmailIMG from './../../../../img/login/envelope.png';
+import UnlockedIMG from './../../../../img/login/unlocked.png';
+import { ADDUSER } from '../../../../store/registrationReduser';
+import { connect } from 'react-redux';
 
-export default class VerifitySignupTwo extends React.Component {
+
+class VerifitySignupTwo extends React.Component {
 constructor(props){
- 
+
   super(props)
   this.state = {
-    formData:{
+ 
       name :'',
       email:'',
       password :'',
-    },
-    type:ADDUSER
-   
+
   }
 }
 changeName=(event)=>{
   let text = event.target.value
-  let otherState = {...this.state.formData }
-  otherState.name = text
-  this.setState( {formData : otherState})
+
+  this.setState( {name : text})
 } 
 changeEmail=(event)=>{
   let text = event.target.value
-  let otherState = {...this.state.formData }
-  otherState.email = text
-  this.setState( {formData : otherState})
+  
+  this.setState( {email: text})
 } 
 changePassword=(event)=>{
   let text = event.target.value
-  let otherState = {...this.state.formData }
-  otherState.password = text
-  this.setState( {formData : otherState})
+  this.setState( {password : text})
  } 
 submit=(event)=>{
-
+debugger
  event.preventDefault()
-this.props.store.dispatch(this.state)
-console.log(this.props.store.getState())
-this.props.rerender()
+this.props.addUser(this.state)
+console.log(this.props)
+
  this.props.toLogin()
  let clean = {
   userName :'',
   userEmail:'',
   password :'',
 }
-this.setState({formData:clean}) 
+this.setState(clean) 
 }
   render() {
+
     return (
       <div className="verifitysignuptwo">
         <div className="verifitysignuptwo__head">
@@ -79,7 +76,7 @@ this.setState({formData:clean})
                 className="verifitysignuptwo__form-input"
                 type="text"
                 placeholder="Username"
-                value={this.state.formData.name}
+                value={this.state.name}
                 onChange={this.changeName}
               />
             </div>
@@ -93,7 +90,7 @@ this.setState({formData:clean})
                 className="verifitysignuptwo__form-input"
                 type="email"
                 placeholder="Email"
-                value={this.state.formData.email}
+                value={this.state.email}
                 onChange={this.changeEmail}
               />
             </div>
@@ -107,7 +104,7 @@ this.setState({formData:clean})
                 className="verifitysignuptwo__form-input"
                 type="password"
                 placeholder="Password"
-                value={this.state.formData.password}
+                value={this.state.password}
                 onChange={this.changePassword}
               />
             </div>
@@ -128,3 +125,21 @@ this.setState({formData:clean})
     )
   }
 }
+
+
+let mapStateToProps =(state)=>{
+ return state
+}
+
+
+let mapDispatchToProps =(dispatch)=>{
+
+  return {addUser : (formData)=>{
+      dispatch({type:ADDUSER, data: formData })
+    }}
+   
+    
+  
+}
+
+export const VerifitySignupContainer = connect(mapStateToProps,mapDispatchToProps)(VerifitySignupTwo)

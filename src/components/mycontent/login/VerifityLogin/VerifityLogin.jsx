@@ -1,48 +1,48 @@
 import React from 'react';
 
 
-import LoginIMG from './../../../img/popup/login@2x.png';
-import AvatarIMG from './../../../img/login/avatar.png'
-import UnlockedIMG from './../../../img/login/unlocked.png'
-import { GETACCES } from '../../../store/registrationReduser';
+import LoginIMG from './../../../../img/popup/login@2x.png';
+import AvatarIMG from './../../../../img/login/avatar.png'
+import UnlockedIMG from './../../../../img/login/unlocked.png'
+import { GETACCES } from '../../../../store/registrationReduser';
+import { connect } from 'react-redux';
+
 
 export default class VerifityLogin extends React.Component {
  constructor(props){ 
    super(props)
    this.state = {
-     formData:{
+     
       name :'',
       password :''
-     },
-    type:GETACCES    
+   
  }
 }
  changeName=(event)=>{
 let text = event.target.value
-let otherState = {...this.state.formData }
-otherState.name = text
-this.setState( {formData : otherState})
+
+this.setState( {name : text})
 
 } 
 changePassword=(event)=>{
 
   let text = event.target.value
-  let otherState = {...this.state.formData }
-  otherState.password = text
-  this.setState( {formData : otherState})
+
+  this.setState( {password : text})
 
 } 
 
  submit=(event)=>{
+   debugger
   event.preventDefault()
-  this.props.store.dispatch(this.state)
-  console.log(this.props.store.getState())
-  this.props.rerender()
+  this.props.getAcces(this.state)
+  console.log(this.props)
+ 
   let clean =  { 
     name :'',
     password :''
   }
-  this.setState({formData : clean})
+  this.setState( clean)
  }
 
 
@@ -72,7 +72,7 @@ changePassword=(event)=>{
                 type="text"
                 placeholder="Username or Email"
                 onChange={this.changeName}
-                value={this.state.formData.name}
+                value={this.state.name}
               />
             </div>
             <div className="verifitylogin__form-group">
@@ -85,7 +85,7 @@ changePassword=(event)=>{
                 className="verifitylogin__form-input"
                 type="text"
                 placeholder="Password"
-                value={this.state.formData.password}
+                value={this.state.password}
                 onChange={this.changePassword}
               />
             </div>
@@ -106,4 +106,19 @@ changePassword=(event)=>{
     )
   }
 }
-
+let mapStateToProps =(state)=>{
+  return state
+ }
+ 
+ 
+ let mapDispatchToProps =(dispatch)=>{
+ 
+   return {getAcces : (formData)=>{
+       dispatch({type:GETACCES, data: formData })
+     }}
+    
+     
+   
+ }
+ 
+ export const VerifityLoginContainer = connect(mapStateToProps,mapDispatchToProps)(VerifityLogin)

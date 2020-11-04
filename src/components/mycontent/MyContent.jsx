@@ -3,10 +3,12 @@ import { Route, Link, BrowserRouter } from 'react-router-dom';
 
 import Post from './Post/Post';
 import VerifityPostRequired from './VerifityPostRequired/VerifityPostRequired';
-import VerifityLogin from './VerifityLogin/VerifityLogin';
+
 import VerifitySignup from './VerifitySignup/VerifitySignup';
-import VerifitySignupTwo from './VerifitySignupTwo/VerifitySignupTwo';
-import {StoreContext} from './../../App'
+
+
+import { MyContentLogin } from './login/MyContentLogin';
+import { MyContentSignupTwo } from './signup/MyContentSignupTwo';
 
 
 export default class MyContent extends React.Component {
@@ -68,7 +70,7 @@ class Verifity extends React.Component {
       case 'signup':  return (<MyContentSignup toLogin={this.toLogin} toSignupForm={this.toSignupForm}/>)
         break;
 
-      case 'signuptwo': return (<MyContentSignupTwo  toSignup={this.toSignup}  toLogin={this.toLogin}/>)
+      case 'signuptwo': return (<MyContentSignupTwo toSignup={this.toSignup}  toLogin={this.toLogin}/>)
         break;
         default:  
           break  
@@ -105,18 +107,6 @@ class MyContentRequired extends React.Component {
   }
 }
 
-class MyContentLogin extends React.Component {
-
-  render() {
-    return (
-
-      <section className="section">
-        <MyContentHeadLogin toSignup={this.props.toSignup}/>
-        <MyContentBodyLogin />
-      </section>
-    )
-  }
-}
 
 class MyContentSignup extends React.Component {
 
@@ -131,19 +121,7 @@ class MyContentSignup extends React.Component {
   }
 }
 
-class MyContentSignupTwo extends React.Component {
 
-  render() {
-   
-    return (
-
-      <section className="section">
-        <MyContentHeadSignupTwo toLogin={this.props.toLogin}/>
-        <MyContentBodySignupTwo  toSignup={this.props.toSignup} toLogin={this.props.toLogin} />
-      </section>
-    )
-  }
-}
 
 class  MyContentHeadRequired extends React.Component {
   render(){
@@ -167,49 +145,6 @@ class MyContentBodyRequired extends React.Component {
   }
 }
 
-class MyContentHeadLogin extends React.Component {
-
-toSignup=()=>{
-  this.props.toSignup()
-}
-
-  render() {
-  
-    return (
-      <div className="section__header">
-        <div className="section__left">
-          <h1 className="section__title">Login</h1>
-          <h4 className="section__subtitle">Sort by</h4>
-          <nav className="section__routers">
-            <li className="section__route">
-              <a className="section__link" href="">Login</a>
-            </li>
-            <li className="section__route">
-              <a className="section__link" onClick={this.toSignup}>Signup</a>
-            </li>
-          </nav>
-        </div>
-
-      </div>
-    )
-
-  }
-}
-
-class MyContentBodyLogin extends React.Component {
-  render() {
-    return (
-      <div className="section__body">
-        <StoreContext.Consumer>
-          {(value)=>{
-            return     <VerifityLogin  store={value.store} rerender={value.rerender}/>
-          }}
-    
-        </StoreContext.Consumer>
-      </div>
-    )
-  }
-}
 
 class MyContentHeadSignup extends React.Component {
   render() {
@@ -244,45 +179,7 @@ class MyContentBodySignup extends React.Component {
 }
 
 
-class MyContentHeadSignupTwo extends React.Component {
-  render() {
-    return (
-      <div className="section__header">
-        <div className="section__left">
-          <h1 className="section__title">SIGNUP</h1>
-          <h4 className="section__subtitle">Sort by</h4>
-          <nav className="section__routers">
-            <li className="section__route">
-              <a className="section__link" href="#" onClick={this.props.toLogin}>Login</a>
-            </li>
-            <li className="section__route">
-              <a className="section__link" href="#">Signup</a>
-            </li>
-          </nav>
-        </div>
-      </div>
-    )
-  }
-}
-class MyContentBodySignupTwo extends React.Component {
-  render() {
-    return (
 
-      <div className="section__body">
-        <StoreContext.Consumer>
-          {(value)=>{
-            return   (  
-            <VerifitySignupTwo   
-              store={value.store} 
-              rerender={value.rerender}  
-              toLogin={this.props.toLogin}
-              toSignup={this.props.toSignup} />
-             ) }}
-        </StoreContext.Consumer>
-      </div>
-    )
-  }
-}
 
 class MyContentHeadPost extends React.Component {
 
