@@ -1,41 +1,58 @@
+import axios from 'axios';
+
 export const ADDUSER = 'ADDUSER';
 export const GETACCES = 'GETACCES';
+export const ISFETCHING = 'ISFETCHING';
 
 
 
 const initialState = {
-    verifity:false,
-    users:[],
-    yourAcces:{},
+    isFetching: false,
+    verifity: false,
+    yourAcces: {},
 }
 
-export  function registrationReduser( state = initialState,action){
-
+export function registrationReduser(state = initialState, action) {
+    debugger
     switch (action.type) {
-        case ADDUSER : {
-            debugger
-          let  copyStateFor = {...state} ;
-          copyStateFor.users = [...state.users]
-          copyStateFor.users.push(action.data)
-          
-        return copyStateFor
+        case ADDUSER: {
+
+            let copyStateFor = { ...state };
+            axios.post('http://localhost:3000/users/', action.data).then(response => {
+                console.log(response.data)
+                copyStateFor.yourAcces = response.data
+            })
+            copyStateFor.verifity = true
+
+
+
+            return copyStateFor
         }
-                   
+
             break;
-        case GETACCES : {
-         debugger
-          let copyStateFor = {...state}
-           copyStateFor.yourAcces = {...state.yourAcces}
-           copyStateFor.yourAcces =  state.users.find(user =>  user.password === action.data.password
-                && ( user.name === action.data.name || user.email === action.data.email ))
-                copyStateFor.verifity = true 
-             return copyStateFor
-           }
-                break;
-    
+        case GETACCES: {
+
+
+            let copyStateFor = { ...state };
+            copyStateFor.yourAcces = action.data;
+            copyStateFor.verifity = true
+            return copyStateFor
+
+        }
+            break;
+        case ISFETCHING: {
+
+
+            let copyStateFor = { ...state };
+            copyStateFor.isFetching = action.status
+            return copyStateFor
+
+        }
+            break;
+
         default: return state
             break;
     }
-    
-    
+
+
 }

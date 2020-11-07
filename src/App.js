@@ -44,7 +44,7 @@ import PostSIMG from './img/sidebar/post-it.png';
 
 
 
-export const StoreContext = React.createContext()
+
 
 
 class App extends React.Component {
@@ -145,7 +145,7 @@ class Sidebar extends React.Component {
 class Header extends React.Component {
 
   render() {
-
+debugger
     return (
       <header className="header">
         <div className="header__verifity">
@@ -171,7 +171,15 @@ class LoginLink extends React.Component {
         return <Link to="/mycontent" className="heder__route">login|Singup</Link>
         break;
       case true:
-        return <div className="user"> <img src={avatarIMG} alt="avatar" className="useravatar" /> <h4 className="username">{this.props.state.yourAcces.name}</h4></div>
+        return (
+          <div className="user">
+           <img src={avatarIMG} alt="avatar" className="useravatar" /> 
+           {this.props.isFetching?  <h4 className="username"> loading yet </h4>
+           :<h4 className="username"> {this.props.state.yourAcces.name} </h4>
+            }
+          
+           </div>
+        )
         break;
 
 
@@ -216,10 +224,6 @@ let mapDispatchToProps =(dispatch)=>{
   return {
     addUser : (formData)=>{
       dispatch({type:ADDUSER, data: formData })
-    },
-    checkUserz :(formData)=>{
-      dispatch({type:GETACCES, data: formData })
-  
     }
   } 
     

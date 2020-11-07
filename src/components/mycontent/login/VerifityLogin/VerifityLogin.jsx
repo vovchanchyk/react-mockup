@@ -1,52 +1,52 @@
 import React from 'react';
-
+import axios from 'axios'
 
 import LoginIMG from './../../../../img/popup/login@2x.png';
 import AvatarIMG from './../../../../img/login/avatar.png'
 import UnlockedIMG from './../../../../img/login/unlocked.png'
-import { GETACCES } from '../../../../store/registrationReduser';
+import { GETACCES, ISFETCHING } from '../../../../store/registrationReduser';
 import { connect } from 'react-redux';
 
 
 export default class VerifityLogin extends React.Component {
- constructor(props){ 
-   super(props)
-   this.state = {
-     
-      name :'',
-      password :''
-   
- }
-}
- changeName=(event)=>{
-let text = event.target.value
+  constructor(props) {
+    debugger
+    super(props)
+    this.state = {
 
-this.setState( {name : text})
+      name: '',
+      password: ''
 
-} 
-changePassword=(event)=>{
-
-  let text = event.target.value
-
-  this.setState( {password : text})
-
-} 
-
- submit=(event)=>{
-   debugger
-  event.preventDefault()
-  this.props.getAcces(this.state)
-  console.log(this.props)
- 
-  let clean =  { 
-    name :'',
-    password :''
+    }
   }
-  this.setState( clean)
- }
+  changeName = (event) => {
+    let text = event.target.value
+
+    this.setState({ name: text })
+
+  }
+  changePassword = (event) => {
+
+    let text = event.target.value
+
+    this.setState({ password: text })
+
+  }
+
+  submit = (event) => {
+    debugger
+    event.preventDefault()
+
+    this.props.getAcces(this.state)
+    let clean ={
+      name: '',
+        password: ''
+    }
+    this.setState(clean)
+  }
 
 
- 
+
   render() {
 
     return (
@@ -97,28 +97,42 @@ changePassword=(event)=>{
           </form>
         </div>
       </div>
-
-
-
-
-
-
     )
   }
 }
-let mapStateToProps =(state)=>{
+let mapStateToProps = (state) => {
   return state
- }
- 
- 
- let mapDispatchToProps =(dispatch)=>{
- 
-   return {getAcces : (formData)=>{
-       dispatch({type:GETACCES, data: formData })
-     }}
-    
-     
-   
- }
- 
- export const VerifityLoginContainer = connect(mapStateToProps,mapDispatchToProps)(VerifityLogin)
+}
+
+
+
+
+const mapDispatchToProps = (dispatch) => {
+  debugger
+  return {
+    getAcces: (formData) =>{
+      let user = {
+        type: GETACCES,
+        data:{}
+      }
+      let val = formData.name
+      let pass = formData.password
+      let request = `http://localhost:3000/users/?name=${val}&password=${pass}`;
+      axios.get(request)
+      .then((response) => {
+        debugger
+        user.data = response.data[0]
+        dispatch(user)
+
+      }) 
+    }
+  }
+
+
+}
+
+
+
+
+
+export const VerifityLoginContainer = connect(mapStateToProps, mapDispatchToProps)(VerifityLogin)
