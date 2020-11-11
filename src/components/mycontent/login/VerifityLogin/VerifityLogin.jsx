@@ -1,55 +1,39 @@
 import React from 'react';
-import axios from 'axios'
-
 import LoginIMG from './../../../../img/popup/login@2x.png';
 import AvatarIMG from './../../../../img/login/avatar.png'
 import UnlockedIMG from './../../../../img/login/unlocked.png'
-import { GETACCES, ISFETCHING } from '../../../../store/registrationReduser';
-import { connect } from 'react-redux';
+import { render } from 'react-dom';
+import { Formik, useFormik } from 'formik';
 
 
-export default class VerifityLogin extends React.Component {
-  constructor(props) {
-    debugger
-    super(props)
-    this.state = {
+export const VerifityLoginForm =(props)=>{
 
-      name: '',
-      password: ''
-
+const formik = useFormik({
+  initialValues:{
+    name:"",
+    password:""
+  },
+  onSubmit: (values,{resetForm}) =>{
+    
+    props.getAcces(values)
+    resetForm({name:'',password:''})
+    
+  },
+  validate: values =>{
+    let errors = {}
+    if(!values.name ){
+      errors.name = "Required"
     }
-  }
-  changeName = (event) => {
-    let text = event.target.value
-
-    this.setState({ name: text })
-
-  }
-  changePassword = (event) => {
-
-    let text = event.target.value
-
-    this.setState({ password: text })
-
-  }
-
-  submit = (event) => {
-    debugger
-    event.preventDefault()
-
-    this.props.getAcces(this.state)
-    let clean ={
-      name: '',
-        password: ''
+    if(!values.password){
+      errors.password = "Required"
     }
-    this.setState(clean)
+    return errors
   }
 
+})
 
-
-  render() {
-
-    return (
+return (
+  
       <div className="verifitylogin">
         <div className="verifitylogin__head">
           <h2 className="verifitylogin__title">LOGIN</h2>
@@ -60,22 +44,26 @@ export default class VerifityLogin extends React.Component {
           />
         </div>
         <div className="verifitylogin__body">
-          <form action="#" className="verifitylogin__form" onSubmit={this.submit}>
-            <div className="verifitylogin__form-group">
-              <img
-                src={AvatarIMG}
-                alt=""
-                className="verifitylogin__form-icon"
-              />
+          <form action="#" className="verifitylogin__form" onSubmit={formik.handleSubmit}>
+            <div className={
+             formik.touched.name && formik.errors.name ? "verifitylogin__form-group error-input"
+              : "verifitylogin__form-group "}>
+              <img src={AvatarIMG} alt="" className="verifitylogin__form-icon "/>
               <input
                 className="verifitylogin__form-input"
+                name="name"
                 type="text"
-                placeholder="Username or Email"
-                onChange={this.changeName}
-                value={this.state.name}
+                onBlur={formik.handleBlur}
+                placeholder={formik.errors.name}
+                value={formik.values.name}
+                onChange={formik.handleChange}
+            
               />
             </div>
-            <div className="verifitylogin__form-group">
+            <div  className={
+             formik.touched.password && formik.errors.password? "verifitylogin__form-group error-input"
+              : "verifitylogin__form-group "
+            }>
               <img
                 src={UnlockedIMG}
                 alt=""
@@ -83,56 +71,34 @@ export default class VerifityLogin extends React.Component {
               />
               <input
                 className="verifitylogin__form-input"
-                type="text"
-                placeholder="Password"
-                value={this.state.password}
-                onChange={this.changePassword}
+                name="password"
+                type="password"
+                onBlur={formik.handleBlur}
+                placeholder={formik.errors.password}
+                value={formik.values.password}
+                onChange={formik.handleChange}
               />
+              
             </div>
             <input
+             
               className="verifitylogin__form-btn"
               type="submit"
-              value='login'
+              value="login"
+             
             />
           </form>
         </div>
       </div>
     )
-  }
-}
-let mapStateToProps = (state) => {
-  return state
-}
+  
 
 
-
-
-const mapDispatchToProps = (dispatch) => {
-  debugger
-  return {
-    getAcces: (formData) =>{
-      let user = {
-        type: GETACCES,
-        data:{}
-      }
-      let val = formData.name
-      let pass = formData.password
-      let request = `http://localhost:3000/users/?name=${val}&password=${pass}`;
-      axios.get(request)
-      .then((response) => {
-        debugger
-        user.data = response.data[0]
-        dispatch(user)
-
-      }) 
-    }
-  }
-
-
+   
 }
 
 
 
 
 
-export const VerifityLoginContainer = connect(mapStateToProps, mapDispatchToProps)(VerifityLogin)
+

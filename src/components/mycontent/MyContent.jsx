@@ -3,10 +3,7 @@ import { Route, Link, BrowserRouter } from 'react-router-dom';
 
 import Post from './Post/Post';
 import VerifityPostRequired from './VerifityPostRequired/VerifityPostRequired';
-
 import VerifitySignup from './VerifitySignup/VerifitySignup';
-
-
 import { MyContentLogin } from './login/MyContentLogin';
 import { MyContentSignupTwo } from './signup/MyContentSignupTwo';
 
@@ -38,6 +35,7 @@ export default class MyContent extends React.Component {
 
 class Verifity extends React.Component {
   constructor(props){
+
   super(props)
     this.state = {
     wayofveritity: 'required'
@@ -169,6 +167,7 @@ class MyContentHeadSignup extends React.Component {
 class MyContentBodySignup extends React.Component {
 
   render() {
+
     return (
 
       <div className="section__body">

@@ -2,10 +2,8 @@ import React from 'react';
 import { Route, Link, BrowserRouter, Redirect, Router } from 'react-router-dom';
 import './App.scss';
 import {store} from './store/storeFromRedux';
-import { ADDUSER, GETACCES } from './store/registrationReduser';
 
 import {connect, Provider} from 'react-redux'
-
 
 import AccountSettings from './components/accountsettings/accountsettings';
 
@@ -16,7 +14,6 @@ import MyContent from './components/mycontent/MyContent'
 import AddContent from './components/addcontent/addcontent'
 
 import Footer from './components/footer/Footer'
-
 
 import Time from './components/time/Time'
 import avatarIMG from './img/login/avatar.png'
@@ -31,6 +28,8 @@ import ChemistryIMG from './img/sidebar/chemistry.png';
 import SettingsIMG from './img/sidebar/settings.png';
 import PostIMG from './img/sidebar/post.png';
 import PostSIMG from './img/sidebar/post-it.png';
+import { GOOUT } from './store/registrationReduser';
+
 
 
 // import store from './store/store';
@@ -58,32 +57,21 @@ class App extends React.Component {
  
   toggleBurger = () => {
     if (this.state.visible === true) {
-
       this.setState({ visible: false })
       console.log(this.state.visible)
     } else {
       this.setState({ visible: true })
     }
   }
-  render() {
-   
+  render() { 
     return (
       <BrowserRouter>
         <div className="App">
-
           <Sidebar visible={this.state.visible} />
         <Provider store={store}>
-
-    
-        <ContainerOfMain/>
+           <ContainerOfMain toggleBurger={this.toggleBurger}  visible={this.state.visible}/>
         </Provider>
          
-          
-         
-
-          <button className="sidebar__burger" onClick={this.toggleBurger}>
-            <span className="sidebar__burger-img" ></span>
-          </button>
         </div>
       </BrowserRouter>
     );
@@ -143,40 +131,42 @@ class Sidebar extends React.Component {
   }
 }
 class Header extends React.Component {
-
   render() {
-debugger
     return (
       <header className="header">
+         <button className="sidebar__burger" onClick={this.props.toggleBurger}>
+            <span className="sidebar__burger-img" ></span>
+          </button>
         <div className="header__verifity">
-          <LoginLink state={this.props.state} />
+          <ContainHeader />
         </div>
       </header>
     )
-
   }
 }
+
+
 class LoginLink extends React.Component {
   constructor(props) {
-
-
     super(props)
-
+    this.state={
+    type: GOOUT
+    }
+  }
+  onClick=()=>{
+    this.props.dispatch(this.state)
   }
   render() {
-
-
     switch (this.props.state.verifity) {
       case false:
-        return <Link to="/mycontent" className="heder__route">login|Singup</Link>
+        return <Link to="/" className="heder__route">login|Singup</Link>
         break;
       case true:
         return (
           <div className="user">
            <img src={avatarIMG} alt="avatar" className="useravatar" /> 
-           {this.props.isFetching?  <h4 className="username"> loading yet </h4>
-           :<h4 className="username"> {this.props.state.yourAcces.name} </h4>
-            }
+            <h4 className="username"> {this.props.state.yourAcces.name} </h4>
+            <button className="goout " onClick={this.onClick} >go out </button>
           
            </div>
         )
@@ -191,18 +181,24 @@ class LoginLink extends React.Component {
 }
 
 
+let  mapStateToPropsHead=(state)=>{
+  return {state : state.registrationReduser}
+}
+let mapDispatchToPropsHead=(dispatch)=>{
+  return  {dispatch :dispatch}
+}
+const ContainHeader = connect(mapStateToPropsHead,mapDispatchToPropsHead)(LoginLink)
 
 
 
 class Main extends React.Component {
 
-  render() {
-
-  
-          
+  render() {     
           return (
             <div className="main">
-              <Header state={this.props}/>
+              
+              <Header state={this.props} toggleBurger={this.props.toggleBurger}/>
+              {/* <Sidebar visible={this.props.visible} /> */}
               <Route exact path="/" component={MyContent} store={this.props} state={this.props}/>
               <PrivateRoute path="/time" component={Time} store={this.props}/>
               <PrivateRoute path="/discover" component={Discover} store={this.props}/>
@@ -211,7 +207,6 @@ class Main extends React.Component {
               <Footer />
             </div>
           )
-
   }
 }
 
@@ -219,17 +214,9 @@ let mapStateToProps =(state)=>{
 
   return state
 }
-let mapDispatchToProps =(dispatch)=>{
 
-  return {
-    addUser : (formData)=>{
-      dispatch({type:ADDUSER, data: formData })
-    }
-  } 
-    
-  
-}
-const ContainerOfMain =connect(mapStateToProps,mapDispatchToProps)(Main)
+
+const ContainerOfMain =connect(mapStateToProps, null)(Main)
 
 
 

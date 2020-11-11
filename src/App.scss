@@ -1,3 +1,5 @@
+
+
 @import "./components/accountsettings/Ditails/Ditails.scss";
 @import "./components/mycontent/login/VerifityLogin/VerifityLogin.scss";
 @import "./components/mycontent/signup/VerifitySignupTwo/VerifitySignupTwo.scss";
@@ -49,6 +51,7 @@ body {
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
+  font-family: 'Roboto', sans-serif;
 }
 input,
 button,
@@ -86,32 +89,35 @@ img {
 .App {
   display: flex;
   height: auto;
+  @media screen and(max-width:768px) {
+     flex-direction: column;
+    
+  }
 }
 
 
 .sidebar {
   min-width: 280px;
-
   background-color: #fefefe;
   box-shadow: 2px 0 45px 20px rgba(114, 124, 129, 0.19);
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  &__brand {
-    display: flex;
-    margin-top: 20px;
+  float: left;
+  @media screen and(max-width:768px) {
+   height: auto;
+    
   }
 
+
   &__burger {
-    position: fixed;
+    margin-left: 40px;
     border: none;
     outline: none;
     width: 32px;
     height: 18px;
     background: transparent;
-    left: 30px;
-    top:30px
+   
   }
   &__burger-img {
     display: block;
@@ -146,6 +152,12 @@ img {
     font-size: 16px;
     font-weight: 400;
     margin-top: 180px;
+    @media screen and(max-width:768px) {
+      margin: 30px;
+      order: 1;
+      
+    }
+    
   }
 
   &__navigation {
@@ -154,12 +166,19 @@ img {
     text-transform: uppercase;
     display: flex;
     flex-direction: column;
-
     font-size: 12px;
+    @media screen and(max-width:768px) {
+     
+     margin: 20px 0 0 0;
+      
+    }
   }
   &__navigation-item {
     height: auto;
     margin-bottom: 25px;
+    &:last-child{
+      margin: 0;
+    }
   }
   &__navigation-item--disabled {
     height: auto;
@@ -182,12 +201,11 @@ img {
   flex-grow: 1;
 }
 .header {
+ 
   display: flex;
   width: 100%;
-
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
-
   height: 75px;
   box-shadow: 0 0 4px 1px rgba(114, 124, 129, 0.19);
   background-color: #fefefe;
@@ -196,6 +214,7 @@ img {
     width: fit-content;
     font-size: 15px;
     margin-right: 62px;
+    position: relative;
   }
 }
 
@@ -209,20 +228,31 @@ img {
   &__header {
     display: flex;
     flex-direction: column;
-
+   
     width: 100%;
     height: 190px;
     border: 1px solid #cdd6da;
     background-color: #fefefe;
-    padding-top: 71px;
-    padding-left: 131px;
+ 
+    padding: 20px;
+   
+    
     position: relative;
+    @media screen and (min-width: 960px){
+      justify-content: space-between;
+      flex-direction: row;
+      padding-left: 131px;
+      padding-top: 71px;
+    }
   }
 
   &__title {
     font-size: 41px;
     font-weight: 400;
     color: #000000;
+    @media screen and (max-width: 768px){
+     font-size: 28px;
+    }
   }
 
   &__subtitle {
@@ -261,8 +291,8 @@ img {
   }
 
   &__btn {
-    position: absolute;
-    right: 81px;
+    // position: absolute;
+    // right: 81px;
     width: 158px;
     height: 40px;
     border-radius: 20px;
@@ -320,12 +350,29 @@ img {
 .user{
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  
+  &:hover .goout{
+    display: block;
+  }
 }
 .username{
   color: #78909c;
   margin-left: 5px;
+ 
 }
-
+.goout{
+  background: transparent;
+  width: 100%;
+  position: absolute;
+  top: 100%;
+  background-color: #78909c;
+  color: #ffffff;
+  left: 0%;
+  display: none;
+  padding: 5px 0px;
+  font-family: 700;
+}
 .step-two {
   width: 50%;
 }
@@ -380,8 +427,7 @@ img {
     color: #03a9f4;
   }
 }
-.without-border {
-}
+
 
 
 .without-border {
@@ -397,9 +443,12 @@ img {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  @media screen and(max-width:960px) {
+     flex-direction: column;
+    
+  }
 }
-.blue {
-}
+
 .without-border {
   border: none;
 }
@@ -433,3 +482,7 @@ button{
  
 
 } 
+
+.error-input{
+  border-bottom: solid red;
+}

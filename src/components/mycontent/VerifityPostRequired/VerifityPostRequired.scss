@@ -4,6 +4,8 @@
   background-color: #fff;
   flex-grow: 1;
   width: 100%;
+  max-width: 700px;
+  min-width: 275px;
 
   &__head {
     color: white;
@@ -24,6 +26,7 @@
   }
 
   &__description {
+    text-align: center;
   }
 
   &__title {
@@ -32,6 +35,8 @@
     color: #fefefe;
     align-self: flex-end;
     font-family: Roboto;
+    text-align: center;
+    border: solid;
   } //есть стили шрифта
 
   &__img {

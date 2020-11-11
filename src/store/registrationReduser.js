@@ -1,27 +1,25 @@
-import axios from 'axios';
+
 
 export const ADDUSER = 'ADDUSER';
 export const GETACCES = 'GETACCES';
 export const ISFETCHING = 'ISFETCHING';
+export const GOOUT = 'GOOUT';
 
 
 
 const initialState = {
-    isFetching: false,
+  
     verifity: false,
     yourAcces: {},
 }
 
 export function registrationReduser(state = initialState, action) {
-    debugger
+
     switch (action.type) {
         case ADDUSER: {
 
             let copyStateFor = { ...state };
-            axios.post('http://localhost:3000/users/', action.data).then(response => {
-                console.log(response.data)
-                copyStateFor.yourAcces = response.data
-            })
+           copyStateFor.yourAcces = action.data
             copyStateFor.verifity = true
 
 
@@ -40,11 +38,12 @@ export function registrationReduser(state = initialState, action) {
 
         }
             break;
-        case ISFETCHING: {
+        case GOOUT: {
 
 
             let copyStateFor = { ...state };
-            copyStateFor.isFetching = action.status
+            copyStateFor.verifity = false
+            copyStateFor.yourAcces={}
             return copyStateFor
 
         }
