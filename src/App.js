@@ -138,7 +138,7 @@ class Header extends React.Component {
             <span className="sidebar__burger-img" ></span>
           </button>
         <div className="header__verifity">
-          <ContainHeader />
+          <ContainHeader toLogin={this.props.toLogin} toSignupForm={this.props.toSignupForm}/>
         </div>
       </header>
     )
@@ -156,10 +156,16 @@ class LoginLink extends React.Component {
   onClick=()=>{
     this.props.dispatch(this.state)
   }
+  toLogin=()=>{
+    this.props.toLogin()
+  }
+  toSignupForm=()=>{
+    this.props.toSignupForm()
+  }
   render() {
     switch (this.props.state.verifity) {
       case false:
-        return <Link to="/" className="heder__route">login|Singup</Link>
+        return <div className="heder__route"> <a href="#" onClick={this.toLogin}>login</a> | <a href="#" onClick={this.toSignupForm}>Singup</a></div>
         break;
       case true:
         return (
@@ -192,18 +198,40 @@ const ContainHeader = connect(mapStateToPropsHead,mapDispatchToPropsHead)(LoginL
 
 
 class Main extends React.Component {
+  constructor(props){
 
-  render() {     
+    super(props)
+      this.state = {
+      wayofveritity: 'required'
+      }
+    }
+  
+    toLogin =()=>{
+  
+      this.setState({wayofveritity : 'login'})
+    }
+    toSignup =()=>{
+    
+      this.setState({wayofveritity : 'signup'})
+    }
+  
+    toSignupForm =()=>{
+      this.setState({ wayofveritity: 'signuptwo'})
+    }
+  
+    // 
+
+  render() {    
+
           return (
             <div className="main">
               
-              <Header state={this.props} toggleBurger={this.props.toggleBurger}/>
-              {/* <Sidebar visible={this.props.visible} /> */}
-              <Route exact path="/" component={MyContent} store={this.props} state={this.props}/>
-              <PrivateRoute path="/time" component={Time} store={this.props}/>
-              <PrivateRoute path="/discover" component={Discover} store={this.props}/>
-              <PrivateRoute path="/addcontent" component={AddContent} store={this.props}/>
-              <PrivateRoute path="/accountsettings" component={AccountSettings} store={this.props}/>
+              <Header state={this.props} toggleBurger={this.props.toggleBurger} toLogin={this.toLogin} toSignupForm={this.toSignupForm}/>
+              <Route exact path="/" render={()=> <MyContent wayofveritity={this.state.wayofveritity}  store={this.props.registrationReduser}toLogin= {this.toLogin} toSignup={this.toSignup} toSignupForm={this.toSignupForm} />  } />
+              <PrivateRoute path="/time" component={Time} store={this.props} />
+              <PrivateRoute path="/discover" component={Discover} store={this.props} />
+              <PrivateRoute path="/addcontent" component={AddContent} store={this.props} />
+              <PrivateRoute path="/accountsettings" component={AccountSettings} store={this.props} />
               <Footer />
             </div>
           )

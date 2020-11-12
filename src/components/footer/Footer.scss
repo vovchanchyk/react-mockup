@@ -1,5 +1,6 @@
 .footer {
   width: 100%;
+
   &__row-up {
     display: flex;
     width: 100%;
@@ -12,7 +13,7 @@
     width: 100%;
     border-top: 1px solid #cdd6da;
     justify-content: space-between;
-    height: 60px;
+    min-height: 60px;
     @media screen and(max-width:966px) {
       font-size: 12px;
       line-height: 20px;

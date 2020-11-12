@@ -9,20 +9,24 @@ import { MyContentSignupTwo } from './signup/MyContentSignupTwo';
 
 
 export default class MyContent extends React.Component {
+  
   constructor(props) {
+
     super(props)
     this.state = {
       verifity: false,
     }
   }
   render() {
-    switch (this.state.verifity) {
+  
+    switch (this.props.store.verifity) {
+    
       case true:
         return <MyContentPost />
 
         break;
       case false:
-        return <Verifity />
+        return <Verifity wayofveritity={this.props.wayofveritity} toLogin={this.props.toLogin} toSignup={this.props.toSignup} toSignupForm={this.props.toSignupForm}/>
 
         break;
 
@@ -34,41 +38,23 @@ export default class MyContent extends React.Component {
 
 
 class Verifity extends React.Component {
-  constructor(props){
 
-  super(props)
-    this.state = {
-    wayofveritity: 'required'
-    }
-  }
-
-  toLogin =()=>{
-
-    this.setState({wayofveritity : 'login'})
-  }
-  toSignup =()=>{
-  
-    this.setState({wayofveritity : 'signup'})
-  }
-
-  toSignupForm =()=>{
-    this.setState({ wayofveritity: 'signuptwo'})
-  }
 
   render() {
+  
 
-    switch (this.state.wayofveritity) {
+    switch (this.props.wayofveritity) {
     
-      case 'required': return <MyContentRequired  toLogin={this.toLogin}/>
+      case 'required': return <MyContentRequired  toLogin={this.props.toLogin}/>
 
         break;
-      case 'login': return (<MyContentLogin  toSignup={this.toSignup} />)
+      case 'login': return (<MyContentLogin  toSignup={this.props.toSignup} />)
 
         break;
-      case 'signup':  return (<MyContentSignup toLogin={this.toLogin} toSignupForm={this.toSignupForm}/>)
+      case 'signup':  return (<MyContentSignup toLogin={this.props.toLogin} toSignupForm={this.props.toSignupForm}/>)
         break;
 
-      case 'signuptwo': return (<MyContentSignupTwo toSignup={this.toSignup}  toLogin={this.toLogin}/>)
+      case 'signuptwo': return (<MyContentSignupTwo toSignup={this.props.toSignup}  toLogin={this.props.toLogin}/>)
         break;
         default:  
           break  
@@ -183,6 +169,7 @@ class MyContentBodySignup extends React.Component {
 class MyContentHeadPost extends React.Component {
 
   render() {
+  
     return (
       <div className="section__header">
         <div className="section__left">

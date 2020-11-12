@@ -52,6 +52,7 @@ return (
               <input
                 className="verifitylogin__form-input"
                 name="name"
+                autoComplete ="off"
                 type="text"
                 onBlur={formik.handleBlur}
                 placeholder={formik.errors.name}

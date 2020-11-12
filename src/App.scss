@@ -88,7 +88,8 @@ img {
 
 .App {
   display: flex;
-  height: auto;
+  height: 100%;
+  // height: auto;
   @media screen and(max-width:768px) {
      flex-direction: column;
     
@@ -98,8 +99,9 @@ img {
 
 .sidebar {
   min-width: 280px;
+  //  height: 100%;
   background-color: #fefefe;
-  box-shadow: 2px 0 45px 20px rgba(114, 124, 129, 0.19);
+  box-shadow: inset -10px 0px 10px 1px  rgba(114, 124, 129, 0.19);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -199,6 +201,7 @@ img {
 }
 .main {
   flex-grow: 1;
+ 
 }
 .header {
  

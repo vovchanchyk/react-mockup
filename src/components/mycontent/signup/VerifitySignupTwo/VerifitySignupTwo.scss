@@ -74,6 +74,12 @@
    
   
   }
+  input:-internal-autofill-selected {
+    appearance: menulist-button;
+    background-color: transparent !important;
+    background-image: none ;
+    color: -internal-light-dark(black, white) !important;
+}
 
   &__form-btn {
     width: 92px;

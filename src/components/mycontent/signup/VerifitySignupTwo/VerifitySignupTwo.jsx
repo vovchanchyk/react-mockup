@@ -78,6 +78,7 @@ export const VerifitySignupTwo = (props) => {
               className="verifitysignuptwo__form-icon"
             />
             <input name="name"
+            autoComplete ="off"
               className="verifitysignuptwo__form-input"
               type="text"
               onBlur={formik.handleBlur}
