@@ -9,7 +9,7 @@ export const GOOUT = 'GOOUT';
 
 const initialState = {
   
-    verifity: true,
+    verifity: false,
     yourAcces: {},
 }
 

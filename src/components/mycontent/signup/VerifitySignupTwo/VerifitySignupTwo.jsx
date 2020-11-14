@@ -19,9 +19,10 @@ export const VerifitySignupTwo = (props) => {
       password: ""
     },
     
-    onSubmit: values => {
-   
+    onSubmit: (values, {resetForm} ) => {
+
      props.addUser(values)
+     resetForm({name:'',email:'', password:''})
      
    
      
@@ -133,7 +134,7 @@ export const VerifitySignupTwo = (props) => {
         <div className="verifitysignuptwo__progress">
           <span className="verifitysignuptwo__progress-rate step-two"></span>
           <ul className="verifitysignuptwo__progressbar">
-            <li className="verifitysignuptwo__step checked" onClick={props.toSignup} ></li>
+            <li className="verifitysignuptwo__step checked" ></li>
             <li className="verifitysignuptwo__step checked ac-info"></li>
             <li className="verifitysignuptwo__step message"></li>
           </ul>

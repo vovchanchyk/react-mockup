@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default class VerifitySignup extends React.Component {
 
@@ -19,7 +20,7 @@ export default class VerifitySignup extends React.Component {
           <h2 className="verifitysignup__description">
             1st step: Verify your Identity using Reddit
         </h2>
-          <button className="verifitysignup__form-btn" onClick={this.props.toSignupForm}>Verifity now</button>
+          <button className="verifitysignup__form-btn" ><Link className="link-router" to="/verifity/signuptwo"> Verifity now </Link> </button>
           <div className="verifitysignup__progress">
             <span className="verifitysignup__progress-rate"></span>
             <ul className="verifitysignup__progressbar">

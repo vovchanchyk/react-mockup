@@ -23,8 +23,7 @@ constructor(props){
           <p className="verifitypost__description">
             "Please authenticate with Reddit to schedule a post."
         </p>
-          <button className="verifitypost__btn" onClick={ this.props.toLogin}> Login Now </button>
-          
+          <button className="verifitypost__btn" ><Link className="link-router" to="/verifity"> Login Now </Link> </button>
         </div>
       </div>
 

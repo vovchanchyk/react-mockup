@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { GETACCES } from '../../../store/registrationReduser';
 import { store } from '../../../store/storeFromRedux';
 import  { VerifityLoginForm, VerifityLoginFormContainer } from './VerifityLogin/VerifityLogin';
@@ -10,11 +11,11 @@ import  { VerifityLoginForm, VerifityLoginFormContainer } from './VerifityLogin/
 export class MyContentLogin extends React.Component {
 
     render() {
- 
+
       return (
 
         <section className="section">
-          <MyContentHeadLogin toSignup={this.props.toSignup}/>
+          <MyContentHeadLogin/>
           <MyContentBodyLogin />
         </section>
       )
@@ -24,9 +25,7 @@ export class MyContentLogin extends React.Component {
   
 class MyContentHeadLogin extends React.Component {
 
-    toSignup=()=>{
-      this.props.toSignup()
-    }
+  
     
       render() {
       
@@ -37,10 +36,10 @@ class MyContentHeadLogin extends React.Component {
               <h4 className="section__subtitle">Sort by</h4>
               <nav className="section__routers">
                 <li className="section__route">
-                  <a className="section__link" href="">Login</a>
+                  <Link className="section__link" to="/verifity/">Login</Link>
                 </li>
                 <li className="section__route">
-                  <a className="section__link" onClick={this.toSignup}>Signup</a>
+                  <Link className="section__link" to="/verifity/signup" >Signup</Link>
                 </li>
               </nav>
             </div>
@@ -86,7 +85,7 @@ const mapDispatchToProps = (dispatch) => {
       let request = `http://localhost:3000/users/?name=${val}&password=${pass}`;
       axios.get(request)
         .then((response) => {
-          debugger
+        
           if (response.data.length > 0) {
             user.data = response.data[0]
             dispatch(user)

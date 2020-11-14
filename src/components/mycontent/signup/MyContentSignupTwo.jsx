@@ -2,6 +2,7 @@
 import axios from 'axios';
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { ADDUSER } from '../../../store/registrationReduser';
 
@@ -15,8 +16,8 @@ export class MyContentSignupTwo extends React.Component {
     return (
 
       <section className="section">
-        <MyContentHeadSignupTwo toLogin={this.props.toLogin} />
-        <MyContentBodySignupTwo toSignup={this.props.toSignup} toLogin={this.props.toLogin} />
+        <MyContentHeadSignupTwo />
+        <MyContentBodySignupTwo  />
       </section>
     )
   }
@@ -33,10 +34,11 @@ class MyContentHeadSignupTwo extends React.Component {
           <h4 className="section__subtitle">Sort by</h4>
           <nav className="section__routers">
             <li className="section__route">
-              <a className="section__link" href="#" onClick={this.props.toLogin}>Login</a>
+              <Link className="section__link" to="/verifity/" >Login</Link>
+            
             </li>
             <li className="section__route">
-              <a className="section__link" href="#">Signup</a>
+              <Link className="section__link" to="/verifity/signup">Signup</Link>
             </li>
           </nav>
         </div>
@@ -58,11 +60,7 @@ class MyContentBodySignupTwo extends React.Component {
       <div className="section__body">
 
 
-        <MyContentSignupTwoContainer 
-          toLogin={this.props.toLogin}
-          toSignup={this.props.toSignup}
-          
-        />
+        <MyContentSignupTwoContainer />
 
 
       </div>
@@ -78,13 +76,14 @@ let mapStateToProps = (state) => {
 let mapDispatchToProps = (dispatch) => {
 
   return {
-    AddUser: (formData) => {
-   debugger
+    addUser: (formData) => {
+ 
       let user = {
         type: ADDUSER,
         data: {}
       }
       axios.post('http://localhost:3000/users/', formData).then(response => {
+        debugger
         user.data = response.data
         dispatch(user)
       })

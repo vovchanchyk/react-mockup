@@ -5,9 +5,9 @@ import {Route,Redirect} from 'react-router-dom';
 
 export const PrivateRoute = ({component: Component, path, ...rest})=>{
 
+
   
-  
-  let verifity = rest.store.registrationReduser.verifity
+  let verifity = rest.store.verifity
  
   
 
@@ -15,7 +15,7 @@ export const PrivateRoute = ({component: Component, path, ...rest})=>{
  
 
  verifity ?  <Component {...rest}/> 
- :<Redirect to='/' /> 
+ :<Redirect to='/verifity' /> 
  )}/>
     
     

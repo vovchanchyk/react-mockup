@@ -1,15 +1,15 @@
 import React from 'react';
-import { Route, Link, BrowserRouter, Redirect, Router } from 'react-router-dom';
+import { Route, Link, BrowserRouter, Redirect, Router, Switch } from 'react-router-dom';
 import './App.scss';
-import {store} from './store/storeFromRedux';
+import { store } from './store/storeFromRedux';
 
-import {connect, Provider} from 'react-redux'
+import { connect, Provider } from 'react-redux'
 
 import AccountSettings from './components/accountsettings/accountsettings';
 
 import Discover from './components/discover/Didcover'
 
-import MyContent from './components/mycontent/MyContent'
+
 
 import AddContent from './components/addcontent/addcontent'
 
@@ -29,6 +29,11 @@ import SettingsIMG from './img/sidebar/settings.png';
 import PostIMG from './img/sidebar/post.png';
 import PostSIMG from './img/sidebar/post-it.png';
 import { GOOUT } from './store/registrationReduser';
+import { MyContentLogin } from './components/mycontent/login/MyContentLogin';
+import { MyContentSignupTwo } from './components/mycontent/signup/MyContentSignupTwo';
+import { MyContentRequired, MyContentSignup, Verifity } from './components/mycontent/MyContent';
+
+
 
 
 
@@ -54,7 +59,7 @@ class App extends React.Component {
       disabled: true
     }
   }
- 
+
   toggleBurger = () => {
     if (this.state.visible === true) {
       this.setState({ visible: false })
@@ -63,15 +68,15 @@ class App extends React.Component {
       this.setState({ visible: true })
     }
   }
-  render() { 
+  render() {
     return (
       <BrowserRouter>
         <div className="App">
           <Sidebar visible={this.state.visible} />
-        <Provider store={store}>
-           <ContainerOfMain toggleBurger={this.toggleBurger}  visible={this.state.visible}/>
-        </Provider>
-         
+          <Provider store={store}>
+            <ContainerOfMain toggleBurger={this.toggleBurger} visible={this.state.visible} />
+          </Provider>
+
         </div>
       </BrowserRouter>
     );
@@ -134,11 +139,11 @@ class Header extends React.Component {
   render() {
     return (
       <header className="header">
-         <button className="sidebar__burger" onClick={this.props.toggleBurger}>
-            <span className="sidebar__burger-img" ></span>
-          </button>
+        <button className="sidebar__burger" onClick={this.props.toggleBurger}>
+          <span className="sidebar__burger-img" ></span>
+        </button>
         <div className="header__verifity">
-          <ContainHeader toLogin={this.props.toLogin} toSignupForm={this.props.toSignupForm}/>
+          <ContainHeader  />
         </div>
       </header>
     )
@@ -149,32 +154,27 @@ class Header extends React.Component {
 class LoginLink extends React.Component {
   constructor(props) {
     super(props)
-    this.state={
-    type: GOOUT
+    this.state = {
+      type: GOOUT
     }
   }
-  onClick=()=>{
+  onClick = () => {
     this.props.dispatch(this.state)
   }
-  toLogin=()=>{
-    this.props.toLogin()
-  }
-  toSignupForm=()=>{
-    this.props.toSignupForm()
-  }
+
   render() {
     switch (this.props.state.verifity) {
       case false:
-        return <div className="heder__route"> <a href="#" onClick={this.toLogin}>login</a> | <a href="#" onClick={this.toSignupForm}>Singup</a></div>
+        return <div className="heder__route"><Link to="/verifity/">login</Link>  | <Link to="/verifity/signup">Signup </Link> </div>
         break;
       case true:
         return (
           <div className="user">
-           <img src={avatarIMG} alt="avatar" className="useravatar" /> 
+            <img src={avatarIMG} alt="avatar" className="useravatar" />
             <h4 className="username"> {this.props.state.yourAcces.name} </h4>
             <button className="goout " onClick={this.onClick} >go out </button>
-          
-           </div>
+
+          </div>
         )
         break;
 
@@ -187,64 +187,60 @@ class LoginLink extends React.Component {
 }
 
 
-let  mapStateToPropsHead=(state)=>{
-  return {state : state.registrationReduser}
+let mapStateToPropsHead = (state) => {
+  return { state: state.registrationReduser }
 }
-let mapDispatchToPropsHead=(dispatch)=>{
-  return  {dispatch :dispatch}
+let mapDispatchToPropsHead = (dispatch) => {
+  return { dispatch: dispatch }
 }
-const ContainHeader = connect(mapStateToPropsHead,mapDispatchToPropsHead)(LoginLink)
+const ContainHeader = connect(mapStateToPropsHead, mapDispatchToPropsHead)(LoginLink)
 
-
-
-class Main extends React.Component {
-  constructor(props){
-
-    super(props)
-      this.state = {
-      wayofveritity: 'required'
-      }
-    }
+class InnerBlock extends React.Component{
+  render(){
+   
+    return(
+      <div>
+     
+       <Route exact path="/" component={MyContentRequired}/>
+       <Route  path="/verifity" component={Verifity} />
+       <PrivateRoute path="/time" component={Time} store={this.props.store} />
+       <PrivateRoute path="/discover" component={Discover} store={this.props.store} />
+       <PrivateRoute path="/addcontent" component={AddContent} store={this.props.store} />
+       <PrivateRoute path="/accountsettings" component={AccountSettings} store={this.props.store} />
+      </div>
   
-    toLogin =()=>{
-  
-      this.setState({wayofveritity : 'login'})
-    }
-    toSignup =()=>{
-    
-      this.setState({wayofveritity : 'signup'})
-    }
-  
-    toSignupForm =()=>{
-      this.setState({ wayofveritity: 'signuptwo'})
-    }
-  
-    // 
-
-  render() {    
-
-          return (
-            <div className="main">
-              
-              <Header state={this.props} toggleBurger={this.props.toggleBurger} toLogin={this.toLogin} toSignupForm={this.toSignupForm}/>
-              <Route exact path="/" render={()=> <MyContent wayofveritity={this.state.wayofveritity}  store={this.props.registrationReduser}toLogin= {this.toLogin} toSignup={this.toSignup} toSignupForm={this.toSignupForm} />  } />
-              <PrivateRoute path="/time" component={Time} store={this.props} />
-              <PrivateRoute path="/discover" component={Discover} store={this.props} />
-              <PrivateRoute path="/addcontent" component={AddContent} store={this.props} />
-              <PrivateRoute path="/accountsettings" component={AccountSettings} store={this.props} />
-              <Footer />
-            </div>
-          )
+    )
   }
 }
 
-let mapStateToProps =(state)=>{
+class Main extends React.Component {
+
+
+
+  render() {
+   
+    return (
+
+      <div className="main">
+
+        <Header state={this.props} toggleBurger={this.props.toggleBurger} />
+        <InnerBlock store={this.props.registrationReduser}/>
+   
+        <Footer />
+      </div>
+    )
+  }
+}
+
+
+
+let mapStateToProps = (state) => {
 
   return state
 }
 
 
-const ContainerOfMain =connect(mapStateToProps, null)(Main)
+const ContainerOfMain = connect(mapStateToProps, null)(Main)
 
 
 
