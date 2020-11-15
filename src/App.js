@@ -153,6 +153,7 @@ class Header extends React.Component {
 
 class LoginLink extends React.Component {
   constructor(props) {
+
     super(props)
     this.state = {
       type: GOOUT
@@ -163,7 +164,7 @@ class LoginLink extends React.Component {
   }
 
   render() {
-    switch (this.props.state.verifity) {
+    switch (this.props.verifity) {
       case false:
         return <div className="heder__route"><Link to="/verifity/">login</Link>  | <Link to="/verifity/signup">Signup </Link> </div>
         break;
@@ -171,7 +172,7 @@ class LoginLink extends React.Component {
         return (
           <div className="user">
             <img src={avatarIMG} alt="avatar" className="useravatar" />
-            <h4 className="username"> {this.props.state.yourAcces.name} </h4>
+            <h4 className="username"> {this.props.yourAcces.name} </h4>
             <button className="goout " onClick={this.onClick} >go out </button>
 
           </div>
@@ -188,7 +189,7 @@ class LoginLink extends React.Component {
 
 
 let mapStateToPropsHead = (state) => {
-  return { state: state.registrationReduser }
+  return  state
 }
 let mapDispatchToPropsHead = (dispatch) => {
   return { dispatch: dispatch }
@@ -218,13 +219,13 @@ class Main extends React.Component {
 
 
   render() {
-   
+ 
     return (
 
       <div className="main">
 
         <Header state={this.props} toggleBurger={this.props.toggleBurger} />
-        <InnerBlock store={this.props.registrationReduser}/>
+        <InnerBlock store={this.props}/>
    
         <Footer />
       </div>

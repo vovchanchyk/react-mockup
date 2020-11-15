@@ -3,34 +3,35 @@ import LoginIMG from './../../../../img/popup/login@2x.png';
 import AvatarIMG from './../../../../img/login/avatar.png'
 import UnlockedIMG from './../../../../img/login/unlocked.png'
 import { render } from 'react-dom';
-import { Formik, useFormik } from 'formik';
+import { ErrorMessage, Field, Form, Formik, useFormik, validateYupSchema } from 'formik';
+import * as yup from 'yup';
 
 
 export const VerifityLoginForm =(props)=>{
 
-const formik = useFormik({
-  initialValues:{
-    name:"",
-    password:""
-  },
-  onSubmit: (values,{resetForm}) =>{
-    
-    props.getAcces(values)
-    resetForm({name:'',password:''})
-    
-  },
-  validate: values =>{
-    let errors = {}
-    if(!values.name ){
-      errors.name = "Required"
+  const validationSchema = yup.object(
+    {
+      name : yup.string().required('Required')
+      .min(4, 'Too short - should be 4 chars minimum.'),
+      password: yup.string()
+      .required("Required")
+      .min(4, 'Too short - should be 4 chars minimum.')
     }
-    if(!values.password){
-      errors.password = "Required"
+  )
+  
+  
+   const initialValues ={
+      name:"",
+      password:""
     }
-    return errors
-  }
-
-})
+  const  onSubmit = (values,{resetForm}) =>{
+      
+      props.getAcces(values)
+      console.log(values)
+      resetForm({name:'',password:''})
+      
+    }
+  
 
 return (
   
@@ -44,43 +45,39 @@ return (
           />
         </div>
         <div className="verifitylogin__body">
-          <form action="#" className="verifitylogin__form" onSubmit={formik.handleSubmit}>
-            <div className={
-             formik.touched.name && formik.errors.name ? "verifitylogin__form-group error-input"
-              : "verifitylogin__form-group "}>
+          <Formik
+              initialValues={initialValues}
+              onSubmit={onSubmit}
+              validationSchema={validationSchema}
+          >
+          <Form action="#" className="verifitylogin__form" >
+            <div className= "verifitylogin__form-group ">
               <img src={AvatarIMG} alt="" className="verifitylogin__form-icon "/>
-              <input
+              <Field
                 className="verifitylogin__form-input"
                 name="name"
                 autoComplete ="off"
                 type="text"
-                onBlur={formik.handleBlur}
-                placeholder={formik.errors.name}
-                value={formik.values.name}
-                onChange={formik.handleChange}
+              
             
               />
             </div>
-            <div  className={
-             formik.touched.password && formik.errors.password? "verifitylogin__form-group error-input"
-              : "verifitylogin__form-group "
-            }>
+            <ErrorMessage name="name"/>
+            <div  className="verifitylogin__form-group ">
               <img
                 src={UnlockedIMG}
                 alt=""
                 className="verifitylogin__form-icon"
               />
-              <input
+              <Field
                 className="verifitylogin__form-input"
                 name="password"
                 type="password"
-                onBlur={formik.handleBlur}
-                placeholder={formik.errors.password}
-                value={formik.values.password}
-                onChange={formik.handleChange}
+              
               />
               
             </div>
+            <ErrorMessage name="password"/>
             <input
              
               className="verifitylogin__form-btn"
@@ -88,7 +85,8 @@ return (
               value="login"
              
             />
-          </form>
+          </Form>
+          </Formik>
         </div>
       </div>
     )

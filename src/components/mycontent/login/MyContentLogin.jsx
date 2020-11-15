@@ -85,7 +85,7 @@ const mapDispatchToProps = (dispatch) => {
       let request = `http://localhost:3000/users/?name=${val}&password=${pass}`;
       axios.get(request)
         .then((response) => {
-        
+     
           if (response.data.length > 0) {
             user.data = response.data[0]
             dispatch(user)
