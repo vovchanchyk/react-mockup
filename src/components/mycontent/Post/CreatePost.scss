@@ -1,0 +1,51 @@
+.createpost{
+  padding: 25px 0px 35px;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  border-bottom: solid 0.5px #dee3e6;
+  background-color: #fff;
+  padding: 25px 50px 35px 50px;
+  margin-bottom: 10px;
+  width: 100%;
+
+&__form{
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+
+ 
+
+}
+&__title{
+  margin-bottom: 10px;
+  color: #78909c
+}
+
+&__textarea{
+  padding: 5px;
+  min-height: 40px;
+  height: auto;
+  background-color: #f2f5f8;
+ 
+
+}
+
+&__btn{
+  width: 92px;
+  height: 19px;
+  color: #ffffff;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: -0.2px;
+  line-height: normal;
+  width: 145px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: #03a9f4;
+  margin-top: 25px;
+
+}
+
+}

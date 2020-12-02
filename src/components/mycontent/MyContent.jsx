@@ -1,43 +1,28 @@
-import React from 'react';
-import { Route, Link, BrowserRouter, Switch } from 'react-router-dom';
+import React from "react";
+import { Route, Link, BrowserRouter, Switch } from "react-router-dom";
 
-import Post from './Post/Post';
-import VerifityPostRequired from './VerifityPostRequired/VerifityPostRequired';
-import VerifitySignup from './VerifitySignup/VerifitySignup';
-import { MyContentLogin } from './login/MyContentLogin';
-import { MyContentSignupTwo } from './signup/MyContentSignupTwo';
+import { Post } from "./Post/Post";
+import VerifityPostRequired from "./VerifityPostRequired/VerifityPostRequired";
+import VerifitySignup from "./VerifitySignup/VerifitySignup";
+import { MyContentLogin } from "./login/MyContentLogin";
+import { MyContentSignupTwo } from "./signup/MyContentSignupTwo";
+import Axios from "axios";
 
-
-
-
-
-export  class Verifity extends React.Component {
-
-
+export class Verifity extends React.Component {
   render() {
-
-    
-    
-     return(
-     
-     <Switch>
-      <Route exact path="/verifity/" component={MyContentLogin} />
-      <Route path="/verifity/signuptwo" component={MyContentSignupTwo} />
-      <Route path="/verifity/signup" component={MyContentSignup} />
+    return (
+      <Switch>
+        <Route exact path="/verifity/" component={MyContentLogin} />
+        <Route path="/verifity/signuptwo" component={MyContentSignupTwo} />
+        <Route path="/verifity/signup" component={MyContentSignup} />
       </Switch>
-    
-     )
-   
-    
-
+    );
   }
 }
 
-
-
-export  class MyContentPost extends React.Component {
+export class MyContentPost extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
   render() {
     return (
@@ -45,51 +30,44 @@ export  class MyContentPost extends React.Component {
         <MyContentHeadPost />
         <MyContentBodyPost />
       </section>
-    )
+    );
   }
 }
 
 export class MyContentRequired extends React.Component {
-
   render() {
-
     return (
-
       <section className="section">
         <MyContentHeadRequired />
         <MyContentBodyRequired />
       </section>
-    )
+    );
   }
 }
 
-
-export  class MyContentSignup extends React.Component {
-
+export class MyContentSignup extends React.Component {
   render() {
     return (
-
       <section className="section">
-        <MyContentHeadSignup/>
+        <MyContentHeadSignup />
         <MyContentBodySignup />
       </section>
-    )
+    );
   }
 }
-
-
 
 class MyContentHeadRequired extends React.Component {
   render() {
     return (
       <div className="section__header">
         <h1 className="section__title">MY CONTENT</h1>
-        <h4 className="section__subtitle">Sorry, you need to login before using this feature</h4>
+        <h4 className="section__subtitle">
+          Sorry, you need to login before using this feature
+        </h4>
       </div>
-    )
+    );
   }
 }
-
 
 class MyContentBodyRequired extends React.Component {
   render() {
@@ -97,10 +75,9 @@ class MyContentBodyRequired extends React.Component {
       <div className="section__body">
         <VerifityPostRequired />
       </div>
-    )
+    );
   }
 }
-
 
 class MyContentHeadSignup extends React.Component {
   render() {
@@ -111,37 +88,33 @@ class MyContentHeadSignup extends React.Component {
           <h4 className="section__subtitle">Sort by</h4>
           <nav className="section__routers">
             <li className="section__route">
-              <Link className="section__link" to ="/verifity/">Login</Link>
+              <Link className="section__link" to="/verifity/">
+                Login
+              </Link>
             </li>
             <li className="section__route">
-              <Link className="section__link"to="/verifity/signup" >Signup</Link>
+              <Link className="section__link" to="/verifity/signup">
+                Signup
+              </Link>
             </li>
           </nav>
         </div>
       </div>
-    )
+    );
   }
 }
 class MyContentBodySignup extends React.Component {
-
   render() {
-
     return (
-
       <div className="section__body">
-        <VerifitySignup  />
+        <VerifitySignup />
       </div>
-    )
+    );
   }
 }
 
-
-
-
 class MyContentHeadPost extends React.Component {
-
   render() {
-
     return (
       <div className="section__header">
         <div className="section__left">
@@ -149,29 +122,48 @@ class MyContentHeadPost extends React.Component {
           <h4 className="section__subtitle">Sort by</h4>
           <nav className="section__routers">
             <li className="section__route">
-              <a className="section__link" href="">Recent</a>
+              <a className="section__link" href="">
+                Recent
+              </a>
             </li>
             <li className="section__route">
-              <a className="section__link" href="">Oldest</a>
+              <a className="section__link" href="">
+                Oldest
+              </a>
             </li>
           </nav>
         </div>
         <button className="section__btn">+ADD CONTENT</button>
       </div>
-    )
-
+    );
   }
 }
 
 class MyContentBodyPost extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [{ body: "waiting for posts" }],
+    };
+  }
+
+  componentDidMount() {
+    Axios.get("http://localhost:3000/posts").then((response) => {
+      console.log(response, "did mount");
+      this.setState({ data: response.data });
+    });
+  }
 
   render() {
+    {
+      console.log(this.state.data, "render");
+    }
     return (
-
       <div className="section__body">
-        <Post />
+        {this.state.data.map((text) => (
+          <Post key={text.id} text={text.body} />
+        ))}
       </div>
-    )
+    );
   }
 }
-
