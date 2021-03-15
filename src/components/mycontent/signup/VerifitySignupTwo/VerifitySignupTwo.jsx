@@ -1,57 +1,42 @@
-import React from 'react';
+import React from 'react'
 
-import LoginIMG from './../../../../img/popup/login@2x.png';
-import AvatarIMG from './../../../../img/login/avatar.png';
-import EmailIMG from './../../../../img/login/envelope.png';
-import UnlockedIMG from './../../../../img/login/unlocked.png';
-import { useFormik } from 'formik';
-
-
-
+import LoginIMG from './../../../../img/popup/login@2x.png'
+import AvatarIMG from './../../../../img/login/avatar.png'
+import EmailIMG from './../../../../img/login/envelope.png'
+import UnlockedIMG from './../../../../img/login/unlocked.png'
+import { useFormik } from 'formik'
 
 export const VerifitySignupTwo = (props) => {
-
-
   const formik = useFormik({
     initialValues: {
-      name: "",
-      email: "",
-      password: ""
+      name: '',
+      email: '',
+      password: ''
     },
-    
-    onSubmit: (values, {resetForm} ) => {
 
-     props.addUser(values)
-     resetForm({name:'',email:'', password:''})
-     
-   
-     
+    onSubmit: (values, { resetForm }) => {
+      props.addUser(values)
+      resetForm({ name: '', email: '', password: '' })
     },
     validate: values => {
-      let errors = {}
+      const errors = {}
       if (!values.name) {
-        errors.name = "Required"
+        errors.name = 'Required'
       }
       if (!values.email) {
-        errors.email = "Required"
+        errors.email = 'Required'
       } else if (
         !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
       ) {
-        errors.email = 'Invalid email address';
+        errors.email = 'Invalid email address'
       }
       if (!values.password) {
-        errors.password = "Required"
+        errors.password = 'Required'
       }
       return errors
     }
 
   })
-
-
-
-
-
-
 
   return (
     <div className="verifitysignuptwo">
@@ -69,10 +54,10 @@ export const VerifitySignupTwo = (props) => {
         Enter you Account Information
       </h2>
         <form action="" className="verifitysignuptwo__form" onSubmit={formik.handleSubmit}>
-          <div className={formik.touched.name
-            && formik.errors.name ?
-            "verifitysignuptwo__form-group error-input"
-            : "verifitysignuptwo__form-group "}>
+          <div className={formik.touched.name &&
+            formik.errors.name
+            ? 'verifitysignuptwo__form-group error-input'
+            : 'verifitysignuptwo__form-group '}>
             <img
               src={AvatarIMG}
               alt=""
@@ -89,10 +74,10 @@ export const VerifitySignupTwo = (props) => {
             />
 
           </div>
-          <div className={formik.touched.email
-            && formik.errors.email ?
-            "verifitysignuptwo__form-group error-input"
-            : "verifitysignuptwo__form-group "}>
+          <div className={formik.touched.email &&
+            formik.errors.email
+            ? 'verifitysignuptwo__form-group error-input'
+            : 'verifitysignuptwo__form-group '}>
             <img
               src={EmailIMG}
               alt=""
@@ -106,14 +91,12 @@ export const VerifitySignupTwo = (props) => {
               placeholder={formik.errors.email}
               onChange={formik.handleChange}
 
-
-
             />
           </div>
-          <div className={formik.touched.password
-            && formik.errors.password ?
-            "verifitysignuptwo__form-group error-input"
-            : "verifitysignuptwo__form-group "}>
+          <div className={formik.touched.password &&
+            formik.errors.password
+            ? 'verifitysignuptwo__form-group error-input'
+            : 'verifitysignuptwo__form-group '}>
             <img
               src={UnlockedIMG}
               alt=""
@@ -142,11 +125,5 @@ export const VerifitySignupTwo = (props) => {
       </div>
     </div>
 
-
   )
 }
-
-
-
-
-

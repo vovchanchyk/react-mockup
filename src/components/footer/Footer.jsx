@@ -1,15 +1,14 @@
-import React from 'react';
+import React from 'react'
 
-import SwitterIMG from './../../img/footer/twitter@1.5x.png';
+import SwitterIMG from './../../img/footer/twitter@1.5x.png'
 
-import RedditIMG from './../../img/footer/reddit@1.5x.png';
+import RedditIMG from './../../img/footer/reddit@1.5x.png'
 
-import InternetIMG from './../../img/footer/internet@1.5x.png';
+import InternetIMG from './../../img/footer/internet@1.5x.png'
 
-export default class Footer extends React.Component{
- 
-    render(){
-        return(
+export default class Footer extends React.Component {
+  render () {
+    return (
             <footer className="footer">
                 <div className="footer__row-up">
                     <ul className="footer__column">
@@ -33,9 +32,8 @@ export default class Footer extends React.Component{
                         <a href="" className="footer__link"><img src={InternetIMG} alt="" className="footer__icon"/></a>
                     </div>
                 </div>
-                
-            </footer>
-        )
-    }
 
+            </footer>
+    )
+  }
 }

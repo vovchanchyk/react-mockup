@@ -1,23 +1,23 @@
-import axios from "axios";
-import React from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { GETACCES } from "../../../store/registrationReduser";
-import { VerifityLoginForm } from "./VerifityLogin/VerifityLogin";
+import axios from 'axios'
+import React from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { GETACCES } from '../../../store/registrationReduser'
+import { VerifityLoginForm } from './VerifityLogin/VerifityLogin'
 
 export class MyContentLogin extends React.Component {
-  render() {
+  render () {
     return (
       <section className="section">
         <MyContentHeadLogin />
         <MyContentBodyLogin />
       </section>
-    );
+    )
   }
 }
 
 class MyContentHeadLogin extends React.Component {
-  render() {
+  render () {
     return (
       <div className="section__header">
         <div className="section__left">
@@ -37,7 +37,7 @@ class MyContentHeadLogin extends React.Component {
           </nav>
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -46,36 +46,36 @@ const MyContentBodyLogin = (props) => {
     <div className="section__body">
       <VerifityLoginContainer />
     </div>
-  );
-};
+  )
+}
 
-let mapStateToProps = (state) => {
-  return state;
-};
+const mapStateToProps = (state) => {
+  return state
+}
 
 const mapDispatchToProps = (dispatch) => {
   return {
     getAcces: (formData) => {
-      let user = {
+      const user = {
         type: GETACCES,
-        data: {},
-      };
-      let val = formData.name;
-      let pass = formData.password;
-      let request = `http://localhost:3000/users/?name=${val}&password=${pass}`;
+        data: {}
+      }
+      const val = formData.name
+      const pass = formData.password
+      const request = `http://localhost:3000/users/?name=${val}&password=${pass}`
       axios.get(request).then((response) => {
         if (response.data.length > 0) {
-          user.data = response.data[0];
-          dispatch(user);
+          user.data = response.data[0]
+          dispatch(user)
         } else {
-          alert("you have not pass registration yet");
+          alert('you have not pass registration yet')
         }
-      });
-    },
-  };
-};
+      })
+    }
+  }
+}
 
 export const VerifityLoginContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(VerifityLoginForm);
+)(VerifityLoginForm)

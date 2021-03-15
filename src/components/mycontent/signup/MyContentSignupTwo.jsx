@@ -1,32 +1,27 @@
 
-import axios from 'axios';
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import axios from 'axios'
+import React from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
-import { ADDUSER } from '../../../store/registrationReduser';
+import { ADDUSER } from '../../../store/registrationReduser'
 
-
-import {VerifitySignupTwo} from './VerifitySignupTwo/VerifitySignupTwo';
+import { VerifitySignupTwo } from './VerifitySignupTwo/VerifitySignupTwo'
 
 export class MyContentSignupTwo extends React.Component {
-
-  render() {
-
+  render () {
     return (
 
       <section className="section">
         <MyContentHeadSignupTwo />
-        <MyContentBodySignupTwo  />
+        <MyContentBodySignupTwo />
       </section>
     )
   }
 }
 
-
-
 class MyContentHeadSignupTwo extends React.Component {
-  render() {
+  render () {
     return (
       <div className="section__header">
         <div className="section__left">
@@ -35,7 +30,7 @@ class MyContentHeadSignupTwo extends React.Component {
           <nav className="section__routers">
             <li className="section__route">
               <Link className="section__link" to="/verifity/" >Login</Link>
-            
+
             </li>
             <li className="section__route">
               <Link className="section__link" to="/verifity/signup">Signup</Link>
@@ -47,38 +42,30 @@ class MyContentHeadSignupTwo extends React.Component {
   }
 }
 class MyContentBodySignupTwo extends React.Component {
-  constructor(props) {
-
+  constructor (props) {
     super(props)
   }
- 
 
-  render() {
- 
+  render () {
     return (
 
       <div className="section__body">
 
-
         <MyContentSignupTwoContainer />
-
 
       </div>
     )
   }
 }
 
-let mapStateToProps = (state) => {
-
+const mapStateToProps = (state) => {
   return state
 }
 
-let mapDispatchToProps = (dispatch) => {
-
+const mapDispatchToProps = (dispatch) => {
   return {
     addUser: (formData) => {
- 
-      let user = {
+      const user = {
         type: ADDUSER,
         data: {}
       }
@@ -90,4 +77,4 @@ let mapDispatchToProps = (dispatch) => {
     }
   }
 }
-export const MyContentSignupTwoContainer = connect(mapStateToProps, mapDispatchToProps,)(VerifitySignupTwo)
+export const MyContentSignupTwoContainer = connect(mapStateToProps, mapDispatchToProps)(VerifitySignupTwo)

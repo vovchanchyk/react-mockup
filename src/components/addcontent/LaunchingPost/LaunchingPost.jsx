@@ -1,8 +1,7 @@
-import React from 'react';
+import React from 'react'
 
 export default class LaunchingPost extends React.Component {
-
-  render() {
+  render () {
     return (
 
       <div className="launching">
@@ -35,7 +34,6 @@ export default class LaunchingPost extends React.Component {
               fortunate financially?
           </p>
 
-
           </div>
           <div className="launching__post">
             <h3 className="launching__post-title">
@@ -48,8 +46,6 @@ export default class LaunchingPost extends React.Component {
             </form>
 
           </div>
-
-
 
           <div className="launching__post without-border">
             <form action="" className="launching__form">
@@ -75,7 +71,6 @@ export default class LaunchingPost extends React.Component {
                   <input type="text" className="launching__fields-input" />
                 </label>
 
-
               </div>
               <div className="launching__swich">
                 <input type="checkbox" className="launching__checkbox" />
@@ -83,12 +78,9 @@ export default class LaunchingPost extends React.Component {
 
             </form>
 
-
-
           </div>
         </div>
       </div>
-
 
     )
   }

@@ -1,63 +1,64 @@
-import React from "react";
-import { Route, Link, BrowserRouter, Switch } from "react-router-dom";
+import React from 'react'
+import { Route, Link, BrowserRouter, Switch } from 'react-router-dom'
 
-import { Post } from "./Post/Post";
-import VerifityPostRequired from "./VerifityPostRequired/VerifityPostRequired";
-import VerifitySignup from "./VerifitySignup/VerifitySignup";
-import { MyContentLogin } from "./login/MyContentLogin";
-import { MyContentSignupTwo } from "./signup/MyContentSignupTwo";
-import Axios from "axios";
+import { Post } from './Post/Post'
+import VerifityPostRequired from './VerifityPostRequired/VerifityPostRequired'
+import VerifitySignup from './VerifitySignup/VerifitySignup'
+import { MyContentLogin } from './login/MyContentLogin'
+import { MyContentSignupTwo } from './signup/MyContentSignupTwo'
+import Axios from 'axios'
 
 export class Verifity extends React.Component {
-  render() {
+  render () {
     return (
       <Switch>
         <Route exact path="/verifity/" component={MyContentLogin} />
         <Route path="/verifity/signuptwo" component={MyContentSignupTwo} />
         <Route path="/verifity/signup" component={MyContentSignup} />
       </Switch>
-    );
+    )
   }
 }
 
 export class MyContentPost extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
   }
-  render() {
+
+  render () {
     return (
       <section className="section">
         <MyContentHeadPost />
         <MyContentBodyPost />
       </section>
-    );
+    )
   }
 }
 
 export class MyContentRequired extends React.Component {
-  render() {
+  render () {
     return (
       <section className="section">
         <MyContentHeadRequired />
         <MyContentBodyRequired />
       </section>
-    );
+    )
   }
 }
 
 export class MyContentSignup extends React.Component {
-  render() {
+  render () {
     return (
       <section className="section">
         <MyContentHeadSignup />
         <MyContentBodySignup />
       </section>
-    );
+    )
   }
 }
 
 class MyContentHeadRequired extends React.Component {
-  render() {
+  render () {
     return (
       <div className="section__header">
         <h1 className="section__title">MY CONTENT</h1>
@@ -65,22 +66,22 @@ class MyContentHeadRequired extends React.Component {
           Sorry, you need to login before using this feature
         </h4>
       </div>
-    );
+    )
   }
 }
 
 class MyContentBodyRequired extends React.Component {
-  render() {
+  render () {
     return (
       <div className="section__body">
         <VerifityPostRequired />
       </div>
-    );
+    )
   }
 }
 
 class MyContentHeadSignup extends React.Component {
-  render() {
+  render () {
     return (
       <div className="section__header">
         <div className="section__left">
@@ -100,21 +101,21 @@ class MyContentHeadSignup extends React.Component {
           </nav>
         </div>
       </div>
-    );
+    )
   }
 }
 class MyContentBodySignup extends React.Component {
-  render() {
+  render () {
     return (
       <div className="section__body">
         <VerifitySignup />
       </div>
-    );
+    )
   }
 }
 
 class MyContentHeadPost extends React.Component {
-  render() {
+  render () {
     return (
       <div className="section__header">
         <div className="section__left">
@@ -135,28 +136,28 @@ class MyContentHeadPost extends React.Component {
         </div>
         <button className="section__btn">+ADD CONTENT</button>
       </div>
-    );
+    )
   }
 }
 
 class MyContentBodyPost extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
-      data: [{ body: "waiting for posts" }],
-    };
+      data: [{ body: 'waiting for posts' }]
+    }
   }
 
-  componentDidMount() {
-    Axios.get("http://localhost:3000/posts").then((response) => {
-      console.log(response, "did mount");
-      this.setState({ data: response.data });
-    });
+  componentDidMount () {
+    Axios.get('http://localhost:3000/posts').then((response) => {
+      console.log(response, 'did mount')
+      this.setState({ data: response.data })
+    })
   }
 
-  render() {
+  render () {
     {
-      console.log(this.state.data, "render");
+      console.log(this.state.data, 'render')
     }
     return (
       <div className="section__body">
@@ -164,6 +165,6 @@ class MyContentBodyPost extends React.Component {
           <Post key={text.id} text={text.body} />
         ))}
       </div>
-    );
+    )
   }
 }

@@ -1,8 +1,8 @@
-import React from 'react';
+import React from 'react'
 
 export default class Ditails extends React.Component {
-    render() {
-      return(
+  render () {
+    return (
         <div className="ditails">
           <div className="ditails__head">
             <h5 className="ditails__title">
@@ -66,9 +66,6 @@ export default class Ditails extends React.Component {
       <p className="ditails__crumb-title red bold">Your email is unverified.</p>
     </div>
   </div>
-      )
-    }
+    )
   }
-
-
-  
+}

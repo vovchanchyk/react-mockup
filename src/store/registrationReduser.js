@@ -1,44 +1,44 @@
-export const ADDUSER = "ADDUSER";
-export const GETACCES = "GETACCES";
-export const ISFETCHING = "ISFETCHING";
-export const GOOUT = "GOOUT";
+export const ADDUSER = 'ADDUSER'
+export const GETACCES = 'GETACCES'
+export const ISFETCHING = 'ISFETCHING'
+export const GOOUT = 'GOOUT'
 
 const initialState = {
   verifity: false,
-  yourAcces: {},
-};
+  yourAcces: {}
+}
 
-export function registrationReduser(state = initialState, action) {
+export function registrationReduser (state = initialState, action) {
   switch (action.type) {
     case ADDUSER:
       {
-        let copyStateFor = { ...state };
-        copyStateFor.yourAcces = action.data;
-        copyStateFor.verifity = true;
+        const copyStateFor = { ...state }
+        copyStateFor.yourAcces = action.data
+        copyStateFor.verifity = true
 
-        return copyStateFor;
+        return copyStateFor
       }
 
-      break;
+      break
     case GETACCES:
       {
-        let copyStateFor = { ...state };
-        copyStateFor.yourAcces = action.data;
-        copyStateFor.verifity = true;
-        return copyStateFor;
+        const copyStateFor = { ...state }
+        copyStateFor.yourAcces = action.data
+        copyStateFor.verifity = true
+        return copyStateFor
       }
-      break;
+      break
     case GOOUT:
       {
-        let copyStateFor = { ...state };
-        copyStateFor.verifity = false;
-        copyStateFor.yourAcces = {};
-        return copyStateFor;
+        const copyStateFor = { ...state }
+        copyStateFor.verifity = false
+        copyStateFor.yourAcces = {}
+        return copyStateFor
       }
-      break;
+      break
 
     default:
-      return state;
-      break;
+      return state
+      break
   }
 }

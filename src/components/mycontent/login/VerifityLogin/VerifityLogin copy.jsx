@@ -1,33 +1,33 @@
-import React from "react";
-import LoginIMG from "./../../../../img/popup/login@2x.png";
-import AvatarIMG from "./../../../../img/login/avatar.png";
-import UnlockedIMG from "./../../../../img/login/unlocked.png";
-import { render } from "react-dom";
-import { Formik, useFormik, validateYupSchema } from "formik";
-import * as yup from "yup";
+import React from 'react'
+import LoginIMG from './../../../../img/popup/login@2x.png'
+import AvatarIMG from './../../../../img/login/avatar.png'
+import UnlockedIMG from './../../../../img/login/unlocked.png'
+import { render } from 'react-dom'
+import { Formik, useFormik, validateYupSchema } from 'formik'
+import * as yup from 'yup'
 
 export const VerifityLoginForm = (props) => {
   const validationSchema = yup.object({
     name: yup
       .string()
-      .required("Required")
-      .min(4, "name is too short - should be 4 chars minimum."),
+      .required('Required')
+      .min(4, 'name is too short - should be 4 chars minimum.'),
     password: yup
       .string()
-      .required("Please provide a valid password")
-      .min(4, "Password is too short - should be 4 chars minimum."),
-  });
+      .required('Please provide a valid password')
+      .min(4, 'Password is too short - should be 4 chars minimum.')
+  })
 
   const formik = useFormik({
     initialValues: {
-      name: "",
-      password: "",
+      name: '',
+      password: ''
     },
     onSubmit: (values, { resetForm }) => {
-      props.getAcces(values);
-      resetForm({ name: "", password: "" });
+      props.getAcces(values)
+      resetForm({ name: '', password: '' })
     },
-    validationSchema,
+    validationSchema
     // validate: values =>{
     //   let errors = {}
     //   if(!values.name ){
@@ -38,7 +38,7 @@ export const VerifityLoginForm = (props) => {
     //   }
     //   return errors
     // }
-  });
+  })
 
   return (
     <div className="verifitylogin">
@@ -55,8 +55,8 @@ export const VerifityLoginForm = (props) => {
           <div
             className={
               formik.touched.name && formik.errors.name
-                ? "verifitylogin__form-group error-input"
-                : "verifitylogin__form-group "
+                ? 'verifitylogin__form-group error-input'
+                : 'verifitylogin__form-group '
             }
           >
             <img src={AvatarIMG} alt="" className="verifitylogin__form-icon " />
@@ -74,8 +74,8 @@ export const VerifityLoginForm = (props) => {
           <div
             className={
               formik.touched.password && formik.errors.password
-                ? "verifitylogin__form-group error-input"
-                : "verifitylogin__form-group "
+                ? 'verifitylogin__form-group error-input'
+                : 'verifitylogin__form-group '
             }
           >
             <img
@@ -101,5 +101,5 @@ export const VerifityLoginForm = (props) => {
         </form>
       </div>
     </div>
-  );
-};
+  )
+}

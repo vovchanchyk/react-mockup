@@ -1,14 +1,13 @@
-import React from 'react';
-import {Route,Link,BrowserRouter} from 'react-router-dom';
+import React from 'react'
+import { Route, Link, BrowserRouter } from 'react-router-dom'
 
 import LoginIMG from './../../../img/popup/login@2x.png'
 export default class VerifityPostRequired extends React.Component {
-constructor(props){
-  super(props)
-}
+  constructor (props) {
+    super(props)
+  }
 
-  render() {
-
+  render () {
     return (
       <div className="verifitypost">
         <div className="verifitypost__head">

@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'
 
 export default class Setpost extends React.Component {
-  render() {
+  render () {
     return (
       <div className="setpost">
         <div className="setpost__head">

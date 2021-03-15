@@ -1,12 +1,11 @@
-import { Component } from "react";
-import React from "react";
+import React, { Component } from 'react'
 
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect } from 'react-router-dom'
 
 export const PrivateRoute = ({ component: Component, path, ...rest }) => {
-  debugger;
+  debugger
 
-  let verifity = rest.store.verifity;
+  const verifity = rest.store.verifity
 
   return (
     <Route
@@ -16,5 +15,5 @@ export const PrivateRoute = ({ component: Component, path, ...rest }) => {
         verifity ? <Component {...rest} /> : <Redirect to="/verifity" />
       }
     />
-  );
-};
+  )
+}

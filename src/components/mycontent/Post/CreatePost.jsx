@@ -1,23 +1,24 @@
-import Axios from "axios";
-import { useFormik } from "formik";
-import React from "react";
+import Axios from 'axios'
+import { useFormik } from 'formik'
+import React from 'react'
 
 export class MyContentCreatePost extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
   }
-  render() {
+
+  render () {
     return (
       <section className="section">
         <MyContentHeadCreatePost />
         <MyContentBodyCreatePost />
       </section>
-    );
+    )
   }
 }
 
 class MyContentHeadCreatePost extends React.Component {
-  render() {
+  render () {
     return (
       <div className="section__header">
         <div className="section__left">
@@ -38,13 +39,13 @@ class MyContentHeadCreatePost extends React.Component {
         </div>
         <button className="section__btn">+ADD CONTENT</button>
       </div>
-    );
+    )
   }
 }
 
 class MyContentBodyCreatePost extends React.Component {
-  render() {
-    return <CreatePost />;
+  render () {
+    return <CreatePost />
   }
 }
 
@@ -58,16 +59,16 @@ export const CreatePost = (props) => {
   const formik = useFormik({
     initialValues: {
       userId: 1,
-      title: "title",
-      body: "",
+      title: 'title',
+      body: ''
     },
     onSubmit: (values, { resetForm }) => {
-      Axios.post("http://localhost:3000/posts", values).then((response) => {
-        console.log(response);
-        resetForm({ body: "" });
-      });
-    },
-  });
+      Axios.post('http://localhost:3000/posts', values).then((response) => {
+        console.log(response)
+        resetForm({ body: '' })
+      })
+    }
+  })
 
   return (
     <div className="section__body">
@@ -88,5 +89,5 @@ export const CreatePost = (props) => {
         </form>
       </div>
     </div>
-  );
-};
+  )
+}

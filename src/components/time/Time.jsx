@@ -1,23 +1,21 @@
-import React from 'react';
-import SetpostTwo from './SetpostTwo/SetpostTwo';
+import React from 'react'
+import SetpostTwo from './SetpostTwo/SetpostTwo'
 
 export default class Time extends React.Component {
+  render () {
+    return (
 
-    render() {
-      return (
-  
         <section className="section">
        <SetpostTwoHead/>
-       <SetpostTwoBody/>       
+       <SetpostTwoBody/>
         </section>
-      )
-    }
+    )
   }
+}
 
-  class SetpostTwoHead extends React.Component {
-
-    render() {
-      return (
+class SetpostTwoHead extends React.Component {
+  render () {
+    return (
         <div className="section__header">
           <div className="section__left">
             <h1 className="section__title">MY CONTENTTT</h1>
@@ -33,19 +31,17 @@ export default class Time extends React.Component {
           </div>
           <button className="section__btn">+ADD CONTENT</button>
         </div>
-      )
-  
-    }
+    )
   }
-  
-  class SetpostTwoBody extends React.Component {
-  
-    render() {
-      return (
-  
-        <div className="section__body">      
+}
+
+class SetpostTwoBody extends React.Component {
+  render () {
+    return (
+
+        <div className="section__body">
           <SetpostTwo />
         </div>
-      )
-    }
+    )
   }
+}

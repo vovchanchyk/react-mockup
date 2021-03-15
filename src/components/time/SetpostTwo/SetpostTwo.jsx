@@ -1,8 +1,8 @@
-import React from 'react';
+import React from 'react'
 
 export default class SetpostTwo extends React.Component {
-    render() {
-      return (
+  render () {
+    return (
         <div className="setposttwo">
           <div className="setposttwo__head">
             <h5 className="setposttwo__title">
@@ -23,7 +23,7 @@ export default class SetpostTwo extends React.Component {
                 <div className="setposttwo__subreddit-title">
                   Vote Threshold
           </div>
-  
+
                 <input
                   type="text"
                   className="setposttwo__input"
@@ -39,10 +39,10 @@ export default class SetpostTwo extends React.Component {
             <div className="setposttwo__item without-border">
               <a href="" className="setposttwo__link">Result will be appear here</a>
             </div>
-  
+
           </div>
         </div>
-  
-      )
-    }
+
+    )
   }
+}

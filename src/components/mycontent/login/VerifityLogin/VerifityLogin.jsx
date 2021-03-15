@@ -1,42 +1,42 @@
-import React from "react";
-import LoginIMG from "./../../../../img/popup/login@2x.png";
-import AvatarIMG from "./../../../../img/login/avatar.png";
-import UnlockedIMG from "./../../../../img/login/unlocked.png";
+import React from 'react'
+import LoginIMG from './../../../../img/popup/login@2x.png'
+import AvatarIMG from './../../../../img/login/avatar.png'
+import UnlockedIMG from './../../../../img/login/unlocked.png'
 
 import {
   ErrorMessage,
   Field,
   Form,
-  Formik,
-} from "formik";
-import * as yup from "yup";
-import { useHistory } from "react-router-dom";
+  Formik
+} from 'formik'
+import * as yup from 'yup'
+import { useHistory } from 'react-router-dom'
 
 export const VerifityLoginForm = (props) => {
-  const verifity = false;
-  const history = useHistory();
+  const verifity = false
+  const history = useHistory()
 
   const validationSchema = yup.object({
     name: yup
       .string()
-      .required("Required")
-      .min(4, "Too short - should be 4 chars minimum."),
+      .required('Required')
+      .min(4, 'Too short - should be 4 chars minimum.'),
     password: yup
       .string()
-      .required("Required")
-      .min(4, "Too short - should be 4 chars minimum."),
-  });
+      .required('Required')
+      .min(4, 'Too short - should be 4 chars minimum.')
+  })
 
   const initialValues = {
-    name: "",
-    password: "",
-  };
+    name: '',
+    password: ''
+  }
   const onSubmit = (values, { resetForm }) => {
-    props.getAcces(values);
-    console.log(values);
-    resetForm({ name: "", password: "" });
-    history.push("/");
-  };
+    props.getAcces(values)
+    console.log(values)
+    resetForm({ name: '', password: '' })
+    history.push('/')
+  }
 
   return (
     <div className="verifitylogin">
@@ -87,5 +87,5 @@ export const VerifityLoginForm = (props) => {
         </Formik>
       </div>
     </div>
-  );
-};
+  )
+}
